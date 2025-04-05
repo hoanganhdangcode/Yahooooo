@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_type_friend1"
+        android:icon="@drawable/ic_contact"
+        android:title="Bạn bè"
+        />
+    <item
+        android:id="@+id/nav_type_friend2"
+        android:icon="@drawable/ic_friendadd"
+        android:title="Lời mời"
+        ></item>
+    <item
+        android:id="@+id/nav_type_chat3"
+        android:icon="@drawable/ic_block"
+        android:title="Đã chặn"
+        ></item>
+
+</menu>

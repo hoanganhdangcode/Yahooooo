@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Activity.ChatActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/header"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/radiuscolorshape"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_back"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            android:id="@+id/back">
+
+        </ImageButton>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/userimage"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            android:src="@drawable/ic_contact"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="3sp"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            ></de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="username"
+            android:id="@+id/username"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/userimage"
+            app:layout_constraintEnd_toStartOf="@id/call"
+            android:layout_margin="10dp"
+            android:lines="1"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/userstatus"
+            android:textSize="18sp"
+            android:text="online"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/username"
+            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintEnd_toEndOf="@id/username"
+            android:lines="1"
+            >
+
+        </TextView>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/videocall"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_call"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            android:id="@+id/call">
+
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/menu"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_webcam"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            android:id="@+id/videocall">
+
+        </ImageButton>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_menu"
+            android:scaleType="fitCenter"
+            android:id="@+id/menu">
+
+        </ImageButton>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/footer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/radiuscolorshape"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:layout_margin="10dp"
+
+        >
+
+        <ImageButton
+            android:id="@+id/attach_file"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_attach"
+            app:layout_constraintBottom_toBottomOf="@id/footer"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintHorizontal_bias="0.034"
+            app:layout_constraintStart_toStartOf="@id/footer"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintVertical_bias="1.0"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+
+            ></ImageButton>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintBottom_toBottomOf="@id/footer"
+            app:layout_constraintStart_toEndOf="@id/location"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_camera"
+            android:id="@+id/camera"
+
+            ></ImageButton>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintBottom_toBottomOf="@id/footer"
+            app:layout_constraintStart_toEndOf="@id/attach_file"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_location"
+            android:id="@+id/location"
+
+            ></ImageButton>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintBottom_toBottomOf="@id/footer"
+            app:layout_constraintStart_toEndOf="@id/camera"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+
+            android:src="@drawable/ic_media"
+            android:id="@+id/library"
+
+            ></ImageButton>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintBottom_toBottomOf="@id/footer"
+            app:layout_constraintStart_toEndOf="@id/library"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+            android:src="@drawable/ic_micro"
+
+            ></ImageButton>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintBottom_toTopOf="@id/attach_file"
+            app:layout_constraintStart_toStartOf="@id/footer"
+            app:layout_constraintEnd_toEndOf="@id/footer"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_send"
+            android:id="@+id/send"
+            android:padding="5dp"
+            android:background="@drawable/radiuscolorshape"
+            android:backgroundTint="@color/buttoncolor"
+
+            ></ImageButton>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/footer"
+            app:layout_constraintEnd_toStartOf="@id/send"
+            app:layout_constraintStart_toStartOf="@id/footer"
+            app:layout_constraintBottom_toTopOf="@id/attach_file"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:hint="Nhập..."
+           android:backgroundTint="@android:color/transparent"
+            android:textColor="@color/white"
+            android:textColorHint="#eee"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            >
+
+        </EditText>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/chattingview"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

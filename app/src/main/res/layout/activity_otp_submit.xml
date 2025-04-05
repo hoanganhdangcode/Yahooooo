@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    tools:context=".Activity.OtpSubmitActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/logo1"
+        android:src="@drawable/logo2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="-50dp"
+        android:layout_marginStart="-50dp"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction1"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.956" />
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction2"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction3"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.64" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="52dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction4"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction5"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.896" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xác thực OTP"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/logo1"
+        android:layout_marginTop="30dp"
+        android:inputType="numberDecimal"
+        android:id="@+id/title">
+
+
+    </TextView>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        android:id="@+id/otpbox"
+        >
+
+        <EditText
+            android:id="@+id/otp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="1"
+            android:hint="0"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="10dp"
+            android:inputType="numberDecimal">
+
+        </EditText>
+        <EditText
+            android:id="@+id/otp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="1"
+            android:hint="0"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="10dp"
+            android:inputType="numberDecimal">
+
+        </EditText>
+        <EditText
+            android:id="@+id/otp3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="1"
+            android:hint="0"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="10dp"
+            android:inputType="numberDecimal">
+
+        </EditText>      <EditText
+        android:id="@+id/otp4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLength="1"
+        android:hint="0"
+        android:textAlignment="center"
+        android:layout_marginHorizontal="10dp"
+        android:inputType="numberDecimal">
+
+    </EditText>
+        <EditText
+            android:id="@+id/otp5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="1"
+            android:hint="0"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="10dp"
+            android:inputType="numberDecimal">
+
+        </EditText>      <EditText
+        android:id="@+id/otp6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:maxLength="1"
+        android:hint="0"
+        android:textAlignment="center"
+        android:layout_marginHorizontal="10dp"
+        android:inputType="numberDecimal">
+
+    </EditText>
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnxacnhan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="Xác nhận"
+
+        app:layout_constraintTop_toBottomOf="@id/otpbox"
+
+        android:backgroundTint="@color/buttoncolor"
+        android:textColor="@color/white">
+
+    </Button>
+    <Button
+        android:id="@+id/btnguilai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:text="Gửi lại OTP"
+        app:layout_constraintTop_toBottomOf="@id/btnxacnhan"
+        android:layout_marginTop="20dp"
+
+        android:backgroundTint="@color/buttoncolor"
+        android:textColor="@color/white"
+        >
+
+    </Button>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:elevation="4dp"
+    android:id="@+id/cardview">
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     >
+     <de.hdodenhof.circleimageview.CircleImageView
+         android:layout_width="80dp"
+         android:layout_height="80dp"
+         android:layout_margin="10dp"
+         android:id="@+id/imageuser"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         android:src="@color/dark_green"
+         >
+
+     </de.hdodenhof.circleimageview.CircleImageView>
+     <TextView
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         app:layout_constraintHeight_percent="0.5"
+         android:gravity="bottom"
+         android:text="Username"
+         android:textSize="25sp"
+         android:textStyle="bold"
+         app:layout_constraintStart_toEndOf="@id/imageuser"
+         app:layout_constraintEnd_toStartOf="@id/btnreject"
+         android:layout_margin="10dp"
+         app:layout_constraintTop_toTopOf="parent"
+         android:id="@+id/username"
+         >
+
+     </TextView>
+     <TextView
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         app:layout_constraintStart_toEndOf="@id/imageuser"
+         app:layout_constraintEnd_toStartOf="@id/btnreject"
+         app:layout_constraintTop_toBottomOf="@id/username"
+         app:layout_constraintBottom_toBottomOf="parent"
+         android:text="Đang chờ kết bạn"
+         android:layout_marginVertical="10dp"
+         android:layout_marginHorizontal="20dp"
+         android:id="@+id/status">
+
+     </TextView>
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Dồng ý"
+         app:layout_constraintEnd_toEndOf="parent"
+         android:layout_margin="10dp"
+         app:layout_constraintTop_toTopOf="parent"
+         android:id="@+id/btnaccept"
+         android:visibility="visible"
+         android:backgroundTint="@color/dark_blue"
+         ></Button>
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Từ chối"
+         app:layout_constraintEnd_toEndOf="parent"
+         android:layout_margin="10dp"
+         app:layout_constraintTop_toBottomOf="@id/btnaccept"
+         android:id="@+id/btnreject"
+         android:visibility="visible"
+         android:backgroundTint="@color/dark_red"
+
+         ></Button>
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Chặn"
+         app:layout_constraintEnd_toEndOf="parent"
+         android:layout_margin="10dp"
+         app:layout_constraintTop_toBottomOf="@id/btnreject"
+         android:id="@+id/btnblock"
+         android:visibility="visible"
+         android:backgroundTint="@color/red"
+
+         ></Button>
+
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

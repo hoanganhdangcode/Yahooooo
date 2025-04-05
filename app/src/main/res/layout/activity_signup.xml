@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activity.SignupActivity"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/signup"
+    android:paddingBottom="100dp"
+
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/logo1"
+        android:src="@drawable/logo2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="-50dp"
+        android:layout_marginStart="-50dp"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction1"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.956" />
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction2"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction3"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.64" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="52dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction4"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction5"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.896" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng kí"
+
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:lines="1"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/logo1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/title"
+        app:layout_constraintVertical_bias="0"
+
+        ></TextView>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Họ và tên"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tphone"
+        android:id="@+id/tname"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        ></TextView>
+    <EditText
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+        android:id="@+id/ename"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:lines="1"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:hint="Tên hiển thị">
+
+    </EditText>
+    <TextView
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Giới tính"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/ename"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tphone"
+        android:id="@+id/tgender"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+
+        ></TextView>
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ename"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/egender"
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:orientation="horizontal"
+        android:background="@drawable/radiusitembox"
+
+
+
+        >
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radiobackgroundcolor"
+            android:button="@android:color/transparent"
+            android:textColor="@color/radiotextcolor"
+            android:gravity="center"
+
+            android:text="Nam"
+            android:id="@+id/male"
+            android:checked="true"
+            android:textStyle="bold"
+            android:textSize="20sp"
+
+
+            >
+
+        </RadioButton>
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/radiobackgroundcolor"
+            android:textColor="@color/radiotextcolor"
+            android:text="Nữ"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+
+
+            android:id="@+id/female"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp">
+        </RadioButton>
+    </RadioGroup>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ngày sinh"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tgender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tphone"
+        android:id="@+id/tbirth"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        ></TextView>
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tgender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/ebirth"
+        android:maxLength="10"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:lines="1"
+        android:maxLines="1"
+        android:inputType="date"
+        android:hint="0/0/0000">
+
+    </EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_height="wrap_content"
+        android:text="Số điện thoại"
+        android:textStyle="bold"
+        android:paddingEnd="15dp"
+
+
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tbirth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tphone"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        ></TextView>
+    <com.hbb20.CountryCodePicker
+        app:ccp_autoDetectLanguage="true"
+        app:ccp_autoDetectCountry="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ccp"
+        app:ccpDialog_textColor="?android:textColorPrimary"
+        app:layout_constraintTop_toTopOf="@id/ephone"
+        app:layout_constraintBottom_toBottomOf="@id/ephone"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:ccp_showArrow="false"
+        app:ccp_showFlag="true"
+        app:ccp_showPhoneCode="true"
+        app:ccp_showFullName="false"
+        app:ccp_contentColor="?android:textColorPrimary"
+
+        app:ccp_showNameCode="false"
+
+        >
+
+    </com.hbb20.CountryCodePicker>
+
+    <EditText
+        android:inputType="phone"
+        android:id="@+id/ephone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="0123456789"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+
+
+        android:lines="1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:maxLength="10"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/ccp"
+        app:layout_constraintTop_toBottomOf="@id/tbirth"
+        app:layout_constraintVertical_bias="0">
+
+    </EditText>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+
+
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tphone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tphone"
+        android:id="@+id/tpassword"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        ></TextView>
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tphone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/epassword"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:lines="1"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+
+
+        android:hint="Nhập mật khẩu">
+
+    </EditText>
+
+
+    <ImageButton
+        android:id="@+id/show1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_show"
+        android:tint="?android:textColorPrimary"
+
+        app:layout_constraintTop_toTopOf="@id/epassword"
+        app:layout_constraintEnd_toEndOf="@id/epassword"
+        app:layout_constraintStart_toStartOf="@id/epassword"
+        app:layout_constraintBottom_toBottomOf="@id/epassword"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias="0.5"
+        ></ImageButton>
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/epassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:id="@+id/econfirmpassword"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:lines="1"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+
+
+        android:hint="Nhập lại mật khẩu">
+
+    </EditText>
+    <ImageButton
+        android:id="@+id/show2"
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_show"
+        android:tint="?android:textColorPrimary"
+        app:layout_constraintTop_toTopOf="@id/econfirmpassword"
+        app:layout_constraintEnd_toEndOf="@id/econfirmpassword"
+        app:layout_constraintStart_toStartOf="@id/econfirmpassword"
+        app:layout_constraintBottom_toBottomOf="@id/econfirmpassword"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        app:layout_constraintVertical_bias="0.5"
+        ></ImageButton>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng kí"
+
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:lines="1"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/econfirmpassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnsignup"
+        app:layout_constraintVertical_bias="0"
+        android:backgroundTint="@color/buttoncolor"
+
+        ></Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

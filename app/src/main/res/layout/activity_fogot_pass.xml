@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.FogotPassActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/logo1"
+        android:src="@drawable/logo2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="-50dp"
+        android:layout_marginStart="-50dp"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction1"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.956" />
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction2"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction3"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.64" />
+
+    <ImageView
+        android:layout_width="65dp"
+        android:layout_height="52dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction4"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.262" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/reaction5"
+        app:layout_constraintBottom_toBottomOf="@id/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@id/logo1"
+        app:layout_constraintTop_toTopOf="@id/logo1"
+        app:layout_constraintVertical_bias="0.896" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xác nhận SĐT"
+
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:lines="1"
+    app:layout_constraintTop_toBottomOf="@id/logo1"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/title"
+
+        app:layout_constraintVertical_bias="0.3"
+
+        ></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="15dp"
+        android:text="Số điện thoại"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:lines="1"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tphone"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+
+        ></TextView>
+    <com.hbb20.CountryCodePicker
+
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="-10dp"
+        app:ccpDialog_textColor="?android:textColorPrimary"
+        app:ccp_contentColor="?android:textColorPrimary"
+
+        app:ccp_autoDetectLanguage="true"
+        app:ccp_autoDetectCountry="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ccp"
+        app:layout_constraintTop_toTopOf="@id/tphone"
+        app:layout_constraintBottom_toBottomOf="@id/tphone"
+        app:layout_constraintStart_toEndOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
+        app:ccp_showArrow="false"
+        app:ccp_showFlag="true"
+        app:ccp_showPhoneCode="true"
+        app:ccp_showFullName="false"
+        app:ccp_showNameCode="false"
+
+        >
+
+    </com.hbb20.CountryCodePicker>
+
+    <EditText
+        android:inputType="phone"
+        android:id="@+id/ephone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="0123456789"
+        android:background="@drawable/radiusitembox"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:lines="1"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tphone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/ccp"
+        app:layout_constraintTop_toTopOf="@id/tphone"
+        app:layout_constraintVertical_bias="1"
+
+        >
+
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gửi OTP"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:backgroundTint="@color/buttoncolor"
+        android:textColor="@color/white"
+
+        android:lines="1"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/ephone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnguiotp"
+        app:layout_constraintVertical_bias="0"
+
+        ></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

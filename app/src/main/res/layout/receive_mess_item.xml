@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/barebone_mess"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="@id/barebone_mess"
+            app:layout_constraintBottom_toBottomOf="@id/body"
+            app:layout_constraintEnd_toEndOf="@id/barebone_mess"
+            app:layout_constraintStart_toStartOf="@id/barebone_mess"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="1"
+            android:layout_marginHorizontal="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_attach"
+            android:id="@+id/uimg"
+            app:civ_border_color="#0000ff"
+            app:civ_border_width="2dp"
+
+
+            >
+
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/barebone_mess"
+            app:layout_constraintEnd_toEndOf="@+id/barebone_mess"
+            app:layout_constraintBottom_toBottomOf="@id/barebone_mess"
+            app:layout_constraintStart_toEndOf="@id/uimg"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:layout_margin="10dp"
+            android:id="@+id/body"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messagetxt"
+                android:text="This messange is loading"
+                android:maxLines="30"
+                app:layout_constraintTop_toTopOf="@id/body"
+                app:layout_constraintBottom_toBottomOf="@id/body"
+                app:layout_constraintStart_toStartOf="@id/body"
+                app:layout_constraintEnd_toEndOf="@id/body"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintVertical_bias="0"
+                android:background="@drawable/left_mess_custom_shape"
+                android:textSize="20sp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="20dp"
+                android:textColor="@color/white"
+                ></TextView>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toBottomOf="@id/body"
+                app:layout_constraintBottom_toBottomOf="@id/body"
+                app:layout_constraintStart_toStartOf="@id/body"
+                app:layout_constraintEnd_toEndOf="@id/body"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintVertical_bias="1"
+                android:src="@drawable/ic_reaction"
+                android:background="@android:color/transparent"
+                android:id="@+id/addreaction"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                ></ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/body"
+            app:layout_constraintBottom_toBottomOf="@id/barebone_mess"
+            app:layout_constraintStart_toStartOf="@id/body"
+            app:layout_constraintEnd_toEndOf="@id/body"
+            android:id="@+id/footer"
+            android:background="@drawable/shape_radius48"
+            android:layout_marginTop="2dp"
+            >
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toStartOf="@id/footer"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/reaction1"
+                android:src="@drawable/reaction1"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp">
+
+
+            </ImageButton>
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toEndOf="@id/reaction1"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/reaction2"
+                android:src="@drawable/reaction2"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp">
+
+
+            </ImageButton>
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toEndOf="@id/reaction2"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/reaction3"
+                android:src="@drawable/reaction3"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp">
+
+
+            </ImageButton>
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toEndOf="@id/reaction3"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/reaction4"
+                android:src="@drawable/reaction4"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp">
+
+
+            </ImageButton>
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toEndOf="@id/reaction4"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/reaction5"
+                android:src="@drawable/reaction5"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="5dp">
+
+
+            </ImageButton>
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="@id/footer"
+                app:layout_constraintBottom_toBottomOf="@id/footer"
+                app:layout_constraintStart_toEndOf="@id/reaction5"
+                app:layout_constraintEnd_toEndOf="@id/footer"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@android:color/transparent"
+                android:id="@+id/removereaction"
+                android:src="@drawable/ic_cancel"
+                android:layout_marginHorizontal="5dp">
+
+
+            </ImageButton>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

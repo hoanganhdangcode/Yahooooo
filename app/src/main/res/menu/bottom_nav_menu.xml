@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/ic_nav_chat"
+        app:itemBackground="@android:color/transparent"
+        android:title="Chat"
+        />
+    <item
+        android:id="@+id/nav_friend"
+        android:icon="@drawable/ic_friendadd"
+        app:itemBackground="@android:color/transparent"
+        android:title="Bạn bè"
+        ></item>
+
+    <item
+        android:id="@+id/nav_feed"
+        android:icon="@drawable/ic_nav_feed"
+        app:itemBackground="@android:color/transparent"
+        android:title="Tin mới" />
+
+    <item
+        android:id="@+id/nav_notification"
+        android:icon="@drawable/ic_notification"
+        app:itemBackground="@android:color/transparent"
+
+        android:title="Thông báo"
+        />
+
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/ic_menu"
+        app:itemBackground="@android:color/transparent"
+        android:title="Thiết lập" />
+</menu>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.MenuFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="150dp"
+
+
+>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/background">
+
+
+    </ImageView>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        app:layout_constraintStart_toStartOf="@id/background"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginBottom="-60dp"
+       app:layout_constraintBottom_toBottomOf="@id/background"
+        android:src="@color/yellow"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="5dp"
+        android:id="@+id/avatar"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        android:lines="1"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:text="Username"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/username"
+        >
+    </TextView>
+
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        android:maxLines="4"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:text="Description"
+        android:layout_marginTop="10dp"
+        android:id="@+id/description"
+        >
+    </TextView>
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chế độ tối"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_margin="10dp"
+        android:id="@+id/nighttheme"
+        ></Switch>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tlanguge"
+        android:text="Ngôn ngữ: "
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/nighttheme">
+
+    </TextView>
+    <com.hbb20.CountryCodePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_contentColor="?android:textColorPrimary"
+        app:ccpDialog_textColor="?android:textColorPrimary"
+
+        app:ccp_autoDetectLanguage="true"
+        app:ccp_showArrow="false"
+        app:ccp_showFullName="true"
+        app:ccp_showNameCode="false"
+        app:ccp_showFlag="true"
+        app:ccp_showPhoneCode="false"
+app:layout_constraintBottom_toBottomOf="@id/tlanguge"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintStart_toEndOf="@id/tlanguge"
+        android:id="@+id/language"
+
+        ></com.hbb20.CountryCodePicker>
+
+
+
+    <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+app:layout_constraintTop_toBottomOf="@id/language"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:id="@+id/btnwall"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+    android:text="Xem trang cá nhân"
+        android:backgroundTint="@color/buttoncolor"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnwall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnedit"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/buttoncolor"
+        android:textColor="@color/white"
+
+
+        android:text="Sửa thông tin"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnedit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnchangepass"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/buttoncolor"
+
+        android:text="Đổi mật khẩu"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnchangepass"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/btnsignout"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:text="Đăng xuất"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
