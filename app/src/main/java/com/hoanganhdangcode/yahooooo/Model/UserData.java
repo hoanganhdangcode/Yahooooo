@@ -3,6 +3,7 @@ package com.hoanganhdangcode.yahooooo.Model;
 public class UserData {
     String uid;
     String name;
+    String phone;
     int gender;
     String birth;
     String avatar;
@@ -11,11 +12,14 @@ public class UserData {
     int status;
     long lastseentime;
     int permission;
-    public UserData() {}
 
-    public UserData(String uid, String name, int gender, String birth, String avatar, String background, String description, int status, long lastseentime, int permission) {
+    public UserData() {
+    }
+
+    public UserData(String uid, String name, String phone, int gender, String birth, String avatar, String background, String description, int status, long lastseentime, int permission) {
         this.uid = uid;
         this.name = name;
+        this.phone = phone;
         this.gender = gender;
         this.birth = birth;
         this.avatar = avatar;
@@ -40,6 +44,14 @@ public class UserData {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public int getGender() {

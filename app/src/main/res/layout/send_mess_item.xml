@@ -1,83 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
         android:id="@+id/barebone_mess"
+    android:layout_margin="5dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/body"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintVertical_bias="1"
-            android:layout_marginHorizontal="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_attach"
-            android:id="@+id/uimg"
-            android:contentDescription="sender image"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="2dp"
 
-            >
-
-
-        </de.hdodenhof.circleimageview.CircleImageView>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/uimg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintVertical_bias="0"
-            android:layout_margin="10dp"
-            android:id="@+id/body"
+            app:layout_constraintTop_toTopOf="parent"
             >
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/messagetxt"
-                android:text="This messange is loading"
-                android:maxLines="30"
-                app:layout_constraintTop_toTopOf="@id/body"
-                app:layout_constraintBottom_toBottomOf="@id/body"
-                app:layout_constraintStart_toStartOf="@id/body"
-                app:layout_constraintEnd_toEndOf="@id/body"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintVertical_bias="0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="15dp"
                 android:background="@drawable/right_mess_custom_shape"
-                android:textSize="20sp"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="20dp"
-                android:textColor="@color/white"
-                ></TextView>
-            <ImageView
-                android:contentDescription="reaction"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:layout_constraintTop_toBottomOf="@id/body"
-                app:layout_constraintBottom_toBottomOf="@id/body"
-                app:layout_constraintStart_toStartOf="@id/body"
-                app:layout_constraintEnd_toEndOf="@id/body"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintVertical_bias="1"
-                android:src="@drawable/ic_reaction"
-                android:background="@android:color/transparent"
-                android:visibility="gone"
-                android:id="@+id/addreaction"
-                android:scaleType="centerCrop"
-                ></ImageView>
+                android:backgroundTint="@color/butt"
+                >
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:text="00:00"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    android:textColor="#ddd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/messagevideo"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/messagetxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="30"
+                    android:text="This messange is loading"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintVertical_bias="0"></TextView>
+
+                <ImageView
+                    android:id="@+id/addreaction"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="reaction"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_reaction"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                  ></ImageView>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/messagetxt"
+                    android:id="@+id/messageimg"
+                    android:visibility="visible"
+                    ></ImageView>
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/messageimg"
+                    app:layout_constraintBottom_toBottomOf="@id/messageimg"
+                    app:layout_constraintStart_toStartOf="@id/messageimg"
+                    app:layout_constraintEnd_toEndOf="@id/messageimg"
+                    android:id="@+id/progressbarimg"
+                    android:visibility="visible"
+
+                    />
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    app:layout_constraintTop_toBottomOf="@id/messageimg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/messagevideo"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    android:background="@color/grey"
+                    ></ImageView>
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/messagevideo"
+                    app:layout_constraintBottom_toBottomOf="@id/messagevideo"
+                    app:layout_constraintStart_toStartOf="@id/messagevideo"
+                    app:layout_constraintEnd_toEndOf="@id/messagevideo"
+                    android:id="@+id/progressbarvideo"
+                    android:visibility="gone"
+
+                    ></ProgressBar>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/messagevideobtn"
+                    app:layout_constraintTop_toTopOf="@id/messagevideo"
+                    app:layout_constraintBottom_toBottomOf="@id/messagevideo"
+                    app:layout_constraintStart_toStartOf="@id/messagevideo"
+                    app:layout_constraintEnd_toEndOf="@id/messagevideo"
+                    android:src="@drawable/ic_playvideo"
+                    android:background="@android:color/transparent"
+                    android:visibility="gone"
+                    >
+
+                </ImageButton>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/body"
+        app:layout_constraintEnd_toEndOf="@id/body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="12sp"
+        android:text="Đang gửi"
+        android:textStyle="italic"
+        android:id="@+id/statusmess"
+        android:textColor="@color/text2">
+
+    </TextView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -121,7 +187,6 @@
                 android:textSize="15sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintHorizontal_bias="0"
-
                 >
 
 
@@ -151,4 +216,3 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>

@@ -1,48 +1,53 @@
 package com.hoanganhdangcode.yahooooo.Model;
 
 public class UserMessage {
-    String messid;
-    String senderuid;
-    String receiveruid;
+    String chatid;
+    String messageid;
+    String sender;
     String content;
     int type;
-    long time;
     int status;
+    long timestamp;
+    String reply;
     int reaction;
+    String localuri;
+    public UserMessage() {}
 
-    public UserMessage(String messid, String senderuid, String receiveruid, String content, int type, long time, int status, int reaction) {
-        this.messid = messid;
-        this.senderuid = senderuid;
-        this.receiveruid = receiveruid;
+    public UserMessage(String chatid, String messageid, String sender, String content, int type, int status, long timestamp, String reply, int reaction, String localuri) {
+        this.chatid = chatid;
+        this.messageid = messageid;
+        this.sender = sender;
         this.content = content;
         this.type = type;
-        this.time = time;
         this.status = status;
+        this.timestamp = timestamp;
+        this.reply = reply;
         this.reaction = reaction;
+        this.localuri = localuri;
     }
 
-    public String getMessid() {
-        return messid;
+    public String getChatid() {
+        return chatid;
     }
 
-    public void setMessid(String messid) {
-        this.messid = messid;
+    public void setChatid(String chatid) {
+        this.chatid = chatid;
     }
 
-    public String getSenderuid() {
-        return senderuid;
+    public String getMessageid() {
+        return messageid;
     }
 
-    public void setSenderuid(String senderuid) {
-        this.senderuid = senderuid;
+    public void setMessageid(String messageid) {
+        this.messageid = messageid;
     }
 
-    public String getReceiveruid() {
-        return receiveruid;
+    public String getSender() {
+        return sender;
     }
 
-    public void setReceiveruid(String receiveruid) {
-        this.receiveruid = receiveruid;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getContent() {
@@ -61,14 +66,6 @@ public class UserMessage {
         this.type = type;
     }
 
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
     public int getStatus() {
         return status;
     }
@@ -77,11 +74,35 @@ public class UserMessage {
         this.status = status;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public int getReaction() {
         return reaction;
     }
 
     public void setReaction(int reaction) {
         this.reaction = reaction;
+    }
+
+    public String getLocaluri() {
+        return localuri;
+    }
+
+    public void setLocaluri(String localuri) {
+        this.localuri = localuri;
     }
 }

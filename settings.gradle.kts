@@ -12,12 +12,13 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) // hoặc DISABLE_REPOS_CHECK nếu muốn
     repositories {
         google()
         mavenCentral()
     }
 }
+
 
 rootProject.name = "Yahooooo"
 include(":app")

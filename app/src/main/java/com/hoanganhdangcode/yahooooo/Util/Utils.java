@@ -6,19 +6,26 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Utils {
 
+    public static final String urlavatardefault = "https://res.cloudinary.com/dbeomwlon/image/upload/v1744406492/avatardefault_xbaqul.png";
+    public static final String urlbackgroundefault= "https://res.cloudinary.com/dbeomwlon/image/upload/v1744406492/backgroun%C4%91efaulr_w0pcvc.jpg";
+    public static final String urlavatarerror = "https://static.vecteezy.com/system/resources/previews/034/998/724/non_2x/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg";
 
 public static void noti(Context context, String s){
     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
@@ -47,7 +54,7 @@ public static String genuuid(){
     public static void hiddenpass(EditText e){
         e.setTransformationMethod(new PasswordTransformationMethod());
     }
-public static String getpref(Context context,String pref, String field){
+public static String getpref(Context context, String pref, String field){
     SharedPreferences sharedPreferences = context.getSharedPreferences(pref, MODE_PRIVATE);
     return sharedPreferences.getString(field, "null");
 }
@@ -87,6 +94,14 @@ public static String getpref(Context context,String pref, String field){
     public static boolean regexphone(String s) {
         String regex = "^(03|05|07|08|09)[0-9]{8}$";
         return s.matches(regex);}
+    public static boolean regexbirth(String s) {
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$";
+        return s.matches(regex);
+    }
+    public static boolean regexpassword(String s) {
+        String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        return s.matches(regex);
+    }
     public static long gettime(){
         long t = System.currentTimeMillis();
         try{
@@ -100,11 +115,52 @@ public static String getpref(Context context,String pref, String field){
         }
         return t;
     }
+    public static boolean isValidPass(String s){
+    return s.length()>=6;
+    }
+    public static boolean isValidPhone(String countryISO, String phone) {
+        switch (countryISO) {
+            case "VN": // Việt Nam
+                return phone.matches("^(03|05|07|08|09)[0-9]{8}$");
+            case "US": // Mỹ
+                return phone.matches("^[2-9]{1}[0-9]{9}$"); // 10 số, không bắt đầu bằng 0/1
+            case "IN": // Ấn Độ
+                return phone.matches("^[6-9]\\d{9}$");
+            default:
+                return Patterns.PHONE.matcher(phone).matches(); // fallback
+        }
+    }
+    public static boolean isValidBirth(String birth){
 
+    return birth.matches("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d\\d)$");
+    }
+    public static String formatTime(long millis){
+    Calendar messageCal = Calendar.getInstance();
+        messageCal.setTimeInMillis(millis);
 
+        Calendar today = Calendar.getInstance();
 
+        boolean isToday = messageCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                messageCal.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR);
+        boolean isYesterday = messageCal.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                messageCal.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR) - 1;
+        boolean inyear = messageCal.get(Calendar.YEAR) == today.get(Calendar.YEAR);
 
+        SimpleDateFormat sdf;
+        if(isToday)
+        {  sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());}
+        else if (isYesterday)
+        {  sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            return sdf.format(new Date(millis)) + " Hôm qua";
 
+        }
+        else if (inyear)
+        {  sdf = new SimpleDateFormat(" HH:mm dd/MM ", Locale.getDefault());}
+        else
+        {sdf = new SimpleDateFormat(" HH:mm dd/MM/yyyy ", Locale.getDefault());}
+
+        return sdf.format(new Date(millis));
+    }
 
 
 

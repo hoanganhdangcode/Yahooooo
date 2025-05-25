@@ -7,7 +7,12 @@ plugins {
 android {
     namespace = "com.hoanganhdangcode.yahooooo"
     compileSdk = 35
-
+    viewBinding {
+        enable = true
+    }
+    dataBinding {
+        enable = true
+    }
     defaultConfig {
         applicationId = "com.hoanganhdangcode.yahooooo"
         minSdk = 24
@@ -53,6 +58,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-database:21.0.0")
     implementation ("com.hbb20:ccp:2.5.0")
     implementation ("com.google.android.material:material:1.10.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
@@ -64,5 +71,10 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.google.code.gson:gson:2.12.1")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
+    implementation("io.github.ParkSangGwon:tedpermission-normal:3.4.2")
+    implementation ("com.google.android.material:material:1.12.0")
+
+
 }
 

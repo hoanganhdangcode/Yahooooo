@@ -107,6 +107,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8"
@@ -197,9 +198,8 @@
         android:text="Xác nhận"
 
         app:layout_constraintTop_toBottomOf="@id/otpbox"
-
-        android:backgroundTint="@color/buttoncolor"
-        android:textColor="@color/white">
+        android:layout_marginTop="50dp"
+        >
 
     </Button>
     <Button
@@ -210,9 +210,6 @@
         android:text="Gửi lại OTP"
         app:layout_constraintTop_toBottomOf="@id/btnxacnhan"
         android:layout_marginTop="20dp"
-
-        android:backgroundTint="@color/buttoncolor"
-        android:textColor="@color/white"
         >
 
     </Button>

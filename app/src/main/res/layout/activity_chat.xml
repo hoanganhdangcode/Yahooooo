@@ -5,15 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background2"
 
     tools:context=".Activity.ChatActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:id="@+id/header"
-        android:layout_margin="5dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/radiuscolorshape"
+        android:backgroundTint="@color/background3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -26,39 +26,38 @@
             android:layout_marginStart="15dp"
             android:src="@drawable/ic_back"
             android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:tint="@color/text1"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
             android:id="@+id/back">
 
         </ImageButton>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/userimage"
-
+            android:id="@+id/chatimage"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/back"
-            android:src="@drawable/ic_contact"
-            app:civ_border_color="@color/black"
-            app:civ_border_width="3sp"
+            android:src="@drawable/avatardefault"
+            android:tint="@color/text1"
+            android:background="@android:color/transparent"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
             ></de.hdodenhof.circleimageview.CircleImageView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="25sp"
-            android:text="username"
-            android:id="@+id/username"
-            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="Loading"
+            android:id="@+id/chatname"
+            android:textColor="@color/text1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/userimage"
+            app:layout_constraintStart_toEndOf="@id/chatimage"
             app:layout_constraintEnd_toStartOf="@id/call"
-            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="15dp"
+
             android:lines="1"
             >
 
@@ -67,29 +66,33 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/userstatus"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="online"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/username"
-            app:layout_constraintStart_toStartOf="@id/username"
-            app:layout_constraintEnd_toEndOf="@id/username"
+            android:textColor="@color/text1"
+            app:layout_constraintTop_toBottomOf="@id/chatname"
+            app:layout_constraintStart_toStartOf="@id/chatname"
+            app:layout_constraintEnd_toEndOf="@id/chatname"
             android:lines="1"
+            android:visibility="gone"
             >
-
         </TextView>
+
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/call"
+            android:layout_width="29dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_call"
+            android:tint="@color/text1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/videocall"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_call"
-            android:scaleType="fitCenter"
-            android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
-            android:id="@+id/call">
+            android:visibility="gone"
+
+
+            app:layout_constraintTop_toTopOf="parent">
 
         </ImageButton>
         <ImageButton
@@ -102,8 +105,11 @@
             android:src="@drawable/ic_webcam"
             android:scaleType="fitCenter"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
+            android:background="@android:color/transparent"
+            android:tint="@color/text1"
+            android:visibility="gone"
+
+
             android:id="@+id/videocall">
 
         </ImageButton>
@@ -114,11 +120,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/ic_menu"
             android:scaleType="fitCenter"
-            android:id="@+id/menu">
+            android:id="@+id/menu"
+            android:tint="@color/text1">
 
         </ImageButton>
 
@@ -134,7 +141,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/radiuscolorshape"
-        android:paddingHorizontal="30dp"
+        android:backgroundTint="@color/background3"
+        android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:layout_margin="10dp"
 
@@ -154,17 +162,18 @@
             app:layout_constraintTop_toTopOf="@id/footer"
             app:layout_constraintVertical_bias="1.0"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
+            android:tint="@color/text1"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
 
             ></ImageButton>
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
             app:layout_constraintTop_toTopOf="@id/footer"
+            android:background="@android:color/transparent"
+            android:tint="@color/text1"
             app:layout_constraintBottom_toBottomOf="@id/footer"
             app:layout_constraintStart_toEndOf="@id/location"
             app:layout_constraintEnd_toEndOf="@id/footer"
@@ -173,14 +182,14 @@
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_camera"
             android:id="@+id/camera"
+            android:visibility="gone"
+
 
             ></ImageButton>
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
             app:layout_constraintTop_toTopOf="@id/footer"
             app:layout_constraintBottom_toBottomOf="@id/footer"
             app:layout_constraintStart_toEndOf="@id/attach_file"
@@ -190,12 +199,15 @@
             android:layout_marginBottom="5dp"
             android:src="@drawable/ic_location"
             android:id="@+id/location"
+            android:visibility="gone"
+            android:tint="@color/text1"
+            android:background="@android:color/transparent"
+
 
             ></ImageButton>
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
-
             app:layout_constraintTop_toTopOf="@id/footer"
             app:layout_constraintBottom_toBottomOf="@id/footer"
             app:layout_constraintStart_toEndOf="@id/camera"
@@ -203,10 +215,9 @@
             app:layout_constraintVertical_bias="1"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginBottom="5dp"
+            android:tint="@color/text1"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
-
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_media"
             android:id="@+id/library"
 
@@ -221,61 +232,80 @@
             app:layout_constraintVertical_bias="1"
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginBottom="5dp"
+            android:tint="@color/text1"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
+            android:background="@android:color/transparent"
             android:src="@drawable/ic_micro"
-
+            android:visibility="gone"
             ></ImageButton>
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
-            app:layout_constraintTop_toTopOf="@id/footer"
-            app:layout_constraintBottom_toTopOf="@id/attach_file"
+            app:layout_constraintTop_toTopOf="@id/emessage"
+            app:layout_constraintBottom_toBottomOf="@id/emessage"
             app:layout_constraintStart_toStartOf="@id/footer"
             app:layout_constraintEnd_toEndOf="@id/footer"
             app:layout_constraintHorizontal_bias="1"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="15dp"
             android:src="@drawable/ic_send"
             android:id="@+id/send"
             android:padding="5dp"
-            android:background="@drawable/radiuscolorshape"
-            android:backgroundTint="@color/buttoncolor"
+            android:background="@android:color/transparent"
+            android:tint="@color/butt"
+            android:scaleType="centerCrop"
+
 
             ></ImageButton>
+
         <EditText
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="@id/footer"
             app:layout_constraintEnd_toStartOf="@id/send"
             app:layout_constraintStart_toStartOf="@id/footer"
-            app:layout_constraintBottom_toTopOf="@id/attach_file"
+            app:layout_constraintBottom_toTopOf="@id/library"
             android:paddingHorizontal="10dp"
             android:layout_marginHorizontal="10dp"
-            android:hint="Nhập..."
+            android:hint="Nhập tin nhắn..."
            android:backgroundTint="@android:color/transparent"
-            android:textColor="@color/white"
-            android:textColorHint="#eee"
+            android:textColor="@color/text1"
+            android:textColorHint="@color/text2"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:id="@+id/emessage"
             >
 
         </EditText>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvchat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/chattingview"
-        >
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bắt đầu trò chuyện ngay"
+        app:layout_constraintTop_toTopOf="@id/rvchat"
+        app:layout_constraintBottom_toBottomOf="@id/rvchat"
+        app:layout_constraintStart_toStartOf="@id/rvchat"
+        app:layout_constraintEnd_toEndOf="@id/rvchat"
+        android:translationZ="10dp"
+        android:textAlignment="center"
+        android:id="@+id/emptychat"
+
+        ></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

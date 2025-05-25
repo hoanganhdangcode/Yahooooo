@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yahooooo</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">test</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+
+    <string name="erorr_not_found"> Lỗi không xác định </string>
+    <string name="language"> Ngôn ngữ </string>
+
+
+    <!-- Đăng nhập -->
+    <string name="login">Đăng nhập</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="login_failed">Đăng nhập thất bại</string>
+
+    <!-- Đăng ký -->
+    <string name="signup">Đăng ký</string>
+    <string name="name">Họ và tên</string>
+    <string name="birth">Ngày sinh</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="signup_success">Đăng ký thành công</string>
+    <string name="signup_failed">Đăng ký thất bại</string>
+    <string name="phone_exists">Số điện thoại đã được đăng ký</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="phone_notexists">Không tìm thấy số điện thoại</string>
+
+
+    <!-- Giới tính -->
+    <string name="gender">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+
+    <!-- Nút và hành động -->
+    <string name="submit">Gửi</string>
+    <string name="cancel">Hủy</string>
+    <string name="ok">Đồng ý</string>
+    <string name="retry">Thử lại</string>
+    <string name="edit">Chỉnh sửa</string>
+    <string name="delete">Xóa</string>
+
+    <!-- Màn hình chính -->
+    <string name="nav_chat">Trò chuyện</string>
+    <string name="nav_friends">Bạn bè</string>
+    <string name="nav_profile">Cá nhân</string>
+
+    <!-- Trạng thái và thông báo -->
+    <string name="loading">Đang tải...</string>
+    <string name="please_wait">Vui lòng chờ...</string>
+    <string name="error_occurred">Đã xảy ra lỗi</string>
+    <string name="no_data">Không có dữ liệu</string>
+    <string name="field_required">Vui lòng nhập đầy đủ thông tin</string>
+    <string name="password_not_match">Mật khẩu không khớp</string>
+
+    <!-- Bạn bè -->
+    <string name="add_friend">Kết bạn</string>
+    <string name="friend_request_sent">Đã gửi lời mời</string>
+    <string name="friends">Bạn bè</string>
+    <string name="blocked">Đã chặn</string>
+    <string name="block">Chặn</string>
+    <string name="unblock">Bỏ chặn</string>
+    <string name="unfriend">Hủy kết bạn</string>
+    <string name="be_blocked">Đã bị chặn</string>
+    <string name="waiting">Đợi chấp nhận</string>
+
+
+    <!-- Hồ sơ -->
+    <string name="edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="status">Trạng thái</string>
+    <string name="description">Giới thiệu</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="confirm_logout">Bạn có chắc chắn muốn đăng xuất?</string>
+
+
+    <!-- tên nav -->
+    <string name="nav_1">Tin nhắn</string>
+    <string name="nav_2"> Bạn bè</string>
+    <string name="nav_3">Bảng tin</string>
+    <string name="nav_4">Thông báo</string>
+    <string name="nav_5">Thiết lập</string>
+
+</resources>

@@ -11,6 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/radiuscolorshape"
+        android:backgroundTint="@color/background3"
         android:layout_margin="10dp"
         android:id="@+id/searchview"
         >
@@ -25,8 +26,9 @@
          android:src="@drawable/ic_search"
          android:scaleType="centerCrop"
          android:padding="5dp"
-         android:background="@drawable/radiuscolorshape"
-         android:backgroundTint="@color/buttoncolor">
+         android:background="@android:color/transparent"
+         android:tint="@color/text1"
+         >
 
      </ImageButton>
         <EditText
@@ -37,20 +39,15 @@
             app:layout_constraintEnd_toStartOf="@id/searchicon"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="5dp"
-
-
-
-
             android:hint="Tìm kiếm..."
             android:backgroundTint="@android:color/transparent"
-            android:textColor="@color/white"
-            android:textColorHint="#ccc"
+            android:textColor="@color/text1"
+            android:textColorHint="@color/text2"
             android:layout_marginStart="20dp"
             android:id="@+id/esearch"
 
 
 ></EditText>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -62,11 +59,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/phanloai"
         android:layout_margin="10dp"
+        android:padding="3dp"
         android:checkedButton="@id/tatca"
         android:background="@drawable/radiusitembox"
-
-
-
         android:orientation="horizontal">
         <RadioButton
             android:layout_width="0dp"
@@ -77,8 +72,6 @@
             android:background="@drawable/radiobackgroundcolor"
             android:textColor="@color/radiotextcolor"
             android:button="@android:color/transparent"
-
-
             android:id="@+id/tatca"
             ></RadioButton>
         <RadioButton
@@ -122,17 +115,44 @@
         </RadioButton>
 
     </RadioGroup>
+   <ProgressBar
+       android:layout_width="match_parent"
+       android:layout_height="30dp"
+       app:layout_constraintTop_toBottomOf="@id/phanloai"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:id="@+id/progressbar"
+       android:translationZ="10dp"
+       android:paddingVertical="10dp">
+
+   </ProgressBar>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/phanloai"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/radiotextcolor"
-
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp">
+        android:id="@+id/friendlist"
+       >
+
 
 
     </androidx.recyclerview.widget.RecyclerView>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Danh sách trống"
+    app:layout_constraintTop_toBottomOf="@id/phanloai"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:visibility="gone"
+    android:id="@+id/danhsachtrong">
+
+</TextView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

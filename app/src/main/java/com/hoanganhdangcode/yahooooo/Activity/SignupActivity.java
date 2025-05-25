@@ -2,20 +2,26 @@ package com.hoanganhdangcode.yahooooo.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.hoanganhdangcode.yahooooo.Model.UserData;
 import com.hoanganhdangcode.yahooooo.Model.UserLogin;
@@ -23,6 +29,7 @@ import com.hoanganhdangcode.yahooooo.R;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
 import com.hoanganhdangcode.yahooooo.Util.UtilsDB;
+import com.hoanganhdangcode.yahooooo.ViewModel.AuthViewModel;
 
 import java.util.Calendar;
 
@@ -33,9 +40,13 @@ public class SignupActivity extends AppCompatActivity {
     int gender;
     RadioGroup egender;
     Button btnsignup;
-    ImageButton show1,show2;
+    ProgressBar progressBar;
+    ImageButton show1,show2,nightmode;
+    boolean isnightmode;
     int showed1=0,showed2=0;
     int trytime=4;
+    private AuthViewModel viewModel;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -51,6 +62,27 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         initview();
+        viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+        viewModel.getSignupMessage().observe(this, msg ->
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show());
+        viewModel.getSignupSuccess().observe(this, success -> {
+            if (success) {
+//                Intent i= new Intent(SignupActivity.this,HomeActivity.class);
+//                Utils.savepref(SignupActivity.this,"logined","uid",viewModel.getLoginUid().getValue());
+//                startActivity(i);
+//                finish();
+            }
+        });
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            btnsignup.setText(isLoading?"":"Đăng kí");
+            btnsignup.setEnabled(isLoading?false:true);
+            progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        });
+
+
+
+
+
 
 
 
@@ -59,74 +91,7 @@ public class SignupActivity extends AppCompatActivity {
         btnsignup.setOnClickListener(v->{
           getdata();
           if (checkdata()){
-              String uid = Utils.genuuid();
-              String hashphone = UtilsCrypto.md5(phone);
-              String salt = Utils.genSalt();
-              String hashpass = UtilsCrypto.md5(password+salt);
-
-              UtilsDB.check("userlogin",hashphone,new UtilsDB.CheckCallback(){
-
-                  @Override
-                  public  void onSuccess(String userid) {
-                      if (userid != null) {
-                          Utils.noti(SignupActivity.this, "Số điện thoại đã tồn tại, bạn còn " + --trytime + " lần thử");
-                          ephone.setError("Số điện thoại đã tồn tại");
-                          if (trytime <= 0) {
-                              Utils.noti(SignupActivity.this, "Quá nhiều lần thử, vui lòng thử lại sau");
-                              System.exit(0);
-                          }
-                      }
-                           else {
-
-
-                                  //them du lieu vao db
-
-                                  //them user login
-
-                                                  UtilsDB.create("userlogin", hashphone, new UserLogin(uid, hashphone, hashpass,salt), new UtilsDB.CreateCallback() {
-                                      @Override
-                                      public void onSuccess() {
-                                          UtilsDB.create("userdata", uid, new UserData(uid, name, gender, birth, "", "", "", 0, 0, 1), new UtilsDB.CreateCallback() {
-                                              @Override
-                                              public void onSuccess() {
-                                                  Utils.noti(SignupActivity.this, "Đăng kí thành công!");
-                                                  Intent i = new Intent(SignupActivity.this, SigninActivity.class);
-                                                  startActivity(i);
-                                                  finish();
-
-                                              }
-
-                                              @Override
-                                              public void onFailure(Exception e) {
-
-                                                  Utils.noti(SignupActivity.this, "Lỗi: " + e.getMessage());
-                                              }
-
-
-                                          });
-
-                                      }
-
-                                      @Override
-                                      public void onFailure(Exception e) {
-                                          Utils.noti(SignupActivity.this, "Lỗi: " + e.getMessage());
-
-                                      }
-                                  }
-                          );//==============xong them user login=======================
-
-
-                            }
-                  }
-                      @Override
-                      public void onFailure (Exception e){
-                          Utils.noti(SignupActivity.this, "Lỗi: " + e.getMessage());
-                      }
-
-                  });
-
-
-
+              viewModel.signup(name,gender,birth,phone,password);
           }
 
         });
@@ -139,15 +104,21 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void initview() {
+        settingnightmode();
         ename=findViewById(R.id.ename);
+        progressBar = findViewById(R.id.progressbar);
         ebirth=findViewById(R.id.ebirth);
         // show dialog chon ngay sinh
+
         ebirth.setOnTouchListener((v,event)->{
             if(event.getAction()== MotionEvent.ACTION_DOWN){showdatepicker();}
 
             return true;
 
         });
+        ebirth.setOnFocusChangeListener(
+                (v, hasFocus) -> {if (hasFocus)showdatepicker();}
+        );
         ephone=findViewById(R.id.ephone);
         epassword=findViewById(R.id.epassword);
         econfirmpassword=findViewById(R.id.econfirmpassword);
@@ -214,16 +185,16 @@ public class SignupActivity extends AppCompatActivity {
             kt= false;
 
         }
-        if (!regexphone(phone)){
+        if (!Utils.regexphone(phone)){
             ephone.setError("Số điện thoại không hợp lệ");
             kt= false;
         }
-        if (!regexbirth(birth)){
+        if (!Utils.regexbirth(birth)){
             ebirth.setError("Ngày sinh không hợp lệ");
             kt= false;
 
         }
-        if (!regexpassword(password)){
+        if (!Utils.regexpassword(password)){
             epassword.setError("Mật khẩu ít nhất 8 kí tự, ít nhất 1 số, 1 chữ");
             kt= false;
         }
@@ -239,18 +210,8 @@ public class SignupActivity extends AppCompatActivity {
 
         return kt;
     }
-    public boolean regexphone(String s) {
-        String regex = "^(03|05|07|08|09)[0-9]{8}$";
-        return s.matches(regex);
-    }
-    public boolean regexbirth(String s) {
-        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$";
-        return s.matches(regex);
-    }
-    public boolean regexpassword(String s) {
-        String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
-        return s.matches(regex);
-    }
+   
+   
     public void showdatepicker() {
         // Lấy ngày hiện tại
         Calendar calendar = Calendar.getInstance();
@@ -287,7 +248,31 @@ public class SignupActivity extends AppCompatActivity {
         }
         return true;
     }
+    public void settingnightmode(){
+        nightmode = findViewById(R.id.nightmode);
+        SharedPreferences sharedPreferences = getSharedPreferences("nightmode", MODE_PRIVATE);
+        isnightmode = sharedPreferences.getBoolean("nightmode", false);
+        if (isnightmode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            nightmode.setImageResource(R.drawable.sunset);
+        } else{                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            nightmode.setImageResource(R.drawable.night);
+        }
 
+        nightmode.setOnClickListener(v->{
+            isnightmode = !isnightmode;
+            SharedPreferences preferences = getSharedPreferences("nightmode", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("nightmode", isnightmode);
+            editor.apply();
+            if (isnightmode){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                nightmode.setImageResource(R.drawable.sunset);
+            } else{ AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                nightmode.setImageResource(R.drawable.night);
+            }
+        });
+    }
 
 
 

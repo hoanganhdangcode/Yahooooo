@@ -5,32 +5,32 @@
         android:id="@+id/nav_chat"
         android:icon="@drawable/ic_nav_chat"
         app:itemBackground="@android:color/transparent"
-        android:title="Chat"
+        android:title="@string/nav_1"
         />
     <item
         android:id="@+id/nav_friend"
         android:icon="@drawable/ic_friendadd"
         app:itemBackground="@android:color/transparent"
-        android:title="Bạn bè"
+        android:title="@string/nav_2"
         ></item>
 
     <item
         android:id="@+id/nav_feed"
         android:icon="@drawable/ic_nav_feed"
         app:itemBackground="@android:color/transparent"
-        android:title="Tin mới" />
+        android:title="@string/nav_3" />
 
     <item
         android:id="@+id/nav_notification"
         android:icon="@drawable/ic_notification"
         app:itemBackground="@android:color/transparent"
 
-        android:title="Thông báo"
+        android:title="@string/nav_4"
         />
 
     <item
         android:id="@+id/nav_menu"
         android:icon="@drawable/ic_menu"
         app:itemBackground="@android:color/transparent"
-        android:title="Thiết lập" />
+        android:title="@string/nav_5" />
 </menu>

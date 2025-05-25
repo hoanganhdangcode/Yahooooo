@@ -25,5 +25,44 @@
     <color name="dark_yellow">#bfff00</color>"
     <color name="dftheme">#fe5552</color>
     <color name="df">#7e1fff</color>
+    <color name="dftext">?android:colorPrimary</color>
+    <color name="black1">#000000</color>
+    <color name="white1">#ffffff</color>
+    <color name="white2">#eeeeee</color>
+    <color name="white3">#dddddd</color>
+    <color name="white4">#cccccc</color>
+    <color name="white5">#bbbbbb</color>
+    <color name="white6">#aaaaaa</color>
+    <color name="white7">#999999</color>
+    <color name="white8">#888888</color>
+    <color name="white9">#777777</color>
+    <color name="white10">#666666</color>
+    <color name="white11">#555555</color>
+     <color name="white12">#444444</color>
+    <color name="white13">#333333</color>
+    <color name="black2">#111111</color>"
+    <color name="black3">#222222</color>"
+    <color name="black4">#333333</color>"
+    <color name="black5">#444444</color>"
+    <color name="black6">#555555</color>"
+    <color name="black7">#666666</color>"
+    <color name="black8">#777777</color>"
+    <color name="background1">#ffffff</color>
+    <color name="background2">#eeeeee</color>
+    <color name="background3">#bbbbbb</color>
+    <color name="text1">#000000</color>
+    <color name="text2">#484848</color>
+    <color name="butt">#01579B</color>
+
+
+
+
+
+
+
+
+
+
+
 
 </resources>

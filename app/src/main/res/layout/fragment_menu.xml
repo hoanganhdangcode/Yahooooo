@@ -76,6 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chế độ tối"
+        android:textColor="@color/text1"
+        android:backgroundTint="@color/text1"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,51 +86,21 @@
         android:layout_margin="10dp"
         android:id="@+id/nighttheme"
         ></Switch>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tlanguge"
-        android:text="Ngôn ngữ: "
-        app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_margin="10dp"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/nighttheme">
-
-    </TextView>
-    <com.hbb20.CountryCodePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:ccp_autoDetectCountry="true"
-        app:ccp_contentColor="?android:textColorPrimary"
-        app:ccpDialog_textColor="?android:textColorPrimary"
-
-        app:ccp_autoDetectLanguage="true"
-        app:ccp_showArrow="false"
-        app:ccp_showFullName="true"
-        app:ccp_showNameCode="false"
-        app:ccp_showFlag="true"
-        app:ccp_showPhoneCode="false"
-app:layout_constraintBottom_toBottomOf="@id/tlanguge"
-        android:layout_marginBottom="-10dp"
-        app:layout_constraintStart_toEndOf="@id/tlanguge"
-        android:id="@+id/language"
-
-        ></com.hbb20.CountryCodePicker>
 
 
 
     <Button
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-app:layout_constraintTop_toBottomOf="@id/language"
+app:layout_constraintTop_toBottomOf="@id/nighttheme"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:id="@+id/btnwall"
         android:layout_margin="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/text1"
     android:text="Xem trang cá nhân"
-        android:backgroundTint="@color/buttoncolor"
+        android:backgroundTint="@color/background3"
         />
 
     <Button
@@ -139,8 +111,8 @@ app:layout_constraintTop_toBottomOf="@id/language"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/btnedit"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/buttoncolor"
-        android:textColor="@color/white"
+        android:backgroundTint="@color/background3"
+        android:textColor="@color/text1"
 
 
         android:text="Sửa thông tin"/>
@@ -152,9 +124,9 @@ app:layout_constraintTop_toBottomOf="@id/language"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/btnchangepass"
-        android:textColor="@color/white"
+        android:textColor="@color/text1"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/buttoncolor"
+        android:backgroundTint="@color/background3"
 
         android:text="Đổi mật khẩu"/>
 
@@ -165,8 +137,8 @@ app:layout_constraintTop_toBottomOf="@id/language"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/btnsignout"
-        android:backgroundTint="@color/red"
-        android:textColor="@color/white"
+        android:backgroundTint="@color/background3"
+        android:textColor="@color/text1"
         android:layout_margin="10dp"
         android:text="Đăng xuất"/>
 

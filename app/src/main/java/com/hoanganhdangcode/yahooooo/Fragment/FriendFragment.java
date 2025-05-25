@@ -2,156 +2,158 @@ package com.hoanganhdangcode.yahooooo.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
-import com.bumptech.glide.util.Util;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hoanganhdangcode.yahooooo.Activity.ChatActivity;
-import com.hoanganhdangcode.yahooooo.Model.UserData;
-import com.hoanganhdangcode.yahooooo.Model.UserFriend;
+import com.hoanganhdangcode.yahooooo.Activity.ProfileActivity;
+import com.hoanganhdangcode.yahooooo.Adapter.FriendAdapter;
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Repository.ChatRepository;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
-import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
-import com.hoanganhdangcode.yahooooo.Util.UtilsDB;
+import com.hoanganhdangcode.yahooooo.ViewModel.FriendViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
-
-
 
 public class FriendFragment extends Fragment {
+    private String thisuid;
+    private EditText esearch;
+    private ImageButton bsearch, btnsearchfriend;
+    private RadioGroup radioGroup;
+    private RecyclerView rvfriend;
+    private ProgressBar progressBar;
+    private FriendAdapter adapter;
+    private FriendViewModel friendViewModel;
+    private ChatRepository chatRepository;
 
-    String thisuid;
-    String search;
-    EditText esearch;
-    ImageButton bsearch;
-    RadioGroup radioGroup;
-    List<UserFriend> tatcalist, banbelist, loimoilist, chanlist;
-    List<UserData> tatcadata, banbedata, loimoidata, chandata,listhienthi;
-    UserFriend searchfriend;
-    String timkiem;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    TextView tvempty;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.fragment_friend, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Load Child Fragment vào Parent Fragment
-        tatcalist=new ArrayList<>();
-        banbelist=new ArrayList<>();
-        loimoilist=new ArrayList<>();
-        chanlist=new ArrayList<>();
-        tatcadata=new ArrayList<>();
-        banbedata=new ArrayList<>();
-        loimoidata=new ArrayList<>();
-        chandata=new ArrayList<>();
-        listhienthi=new ArrayList<>();
-        initview(view);
-        getData();
-
-
-
-
+        initView(view);
     }
 
-    private void initview(View view) {
-        thisuid = Utils.getpref(getContext(), "logined", "uid");
-        esearch=view.findViewById(R.id.esearch);
-        radioGroup = view.findViewById(R.id.phanloai);
+    private void initView(View view) {
+        thisuid = new Utils().getpref(getContext(), "logined", "uid");
+        friendViewModel = new ViewModelProvider(this).get(FriendViewModel.class);
+        friendViewModel.setCurrentUid(thisuid);
+        esearch = view.findViewById(R.id.esearch);
         bsearch = view.findViewById(R.id.searchicon);
-        esearch.addTextChangedListener(new TextWatcher() {
+        radioGroup = view.findViewById(R.id.phanloai);
+        rvfriend = view.findViewById(R.id.friendlist);
+        progressBar = view.findViewById(R.id.progressbar);
+        tvempty = view.findViewById(R.id.danhsachtrong);
+
+        adapter = new FriendAdapter(getContext(), new ArrayList<>(), new FriendAdapter.OnFriendActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onAdd(String uid, int status) {
+                int st1 = -1, st2 = -1;
+                if (status < 0) { st1 = 3; st2 = 4; }
+                else if (status == 3 || status == 5) { st1 = -1; st2 = -1; }
+                else if (status == 4) { st1 = 5; st2 = 5; }
+                adapter.showLoadingFor(uid);
+                friendViewModel.changeFriendStatus(thisuid, uid, st1, st2);
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onCancel(String uid) {
+                adapter.showLoadingFor(uid);
+                friendViewModel.changeFriendStatus(thisuid, uid, -1, -1);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length()>0) {
+            public void onChat(String uid, int status) {
+                try {
+                    if (chatRepository == null) chatRepository = new ChatRepository();
+                    if (thisuid == null) thisuid = Utils.getpref(getContext(), "logined", "uid");
 
-                    if (Utils.regexphone(s.toString())){
-                        String hashphone = UtilsCrypto.md5(s.toString());
-                        UtilsDB.getuid(hashphone, new UtilsDB.GetuidCallback() {
-                            @Override
-                            public void onExist(String uid) {
-                                if (uid!=null){
-                                    timkiem=uid;
-                                    Utils.noti(getActivity(), "Tìm kiếm: "+timkiem);
-                                }
-                            }
-                                @Override
-                               public void onNotExist()  {
-                                    Utils.noti(getActivity(), "Không tìm thấy");
-                                }
+                    chatRepository.createPrivateChatIfNotExists(thisuid, uid, gettype(status), new ChatRepository.OnChatCreated() {
+                        @Override
+                        public void onSuccess(String chatid) {
+                            Intent intent = new Intent(getContext(), ChatActivity.class);
+                            intent.putExtra("chatid", chatid);
+                            startActivity(intent);
+                        }
 
-
-                            @Override
-                            public void onFailure(Exception e) {
-                                Utils.noti(getActivity(), "Lỗi kết nối");
-
-                            }
-                        });
-                        bsearch.setOnClickListener(v->{
-                        });
-
-                    }
+                        @Override
+                        public void onFailure(Exception e) {
+                            Log.e("FriendFragment", "Create chat failed: " + e.getMessage());
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("FriendFragment", "onChat Exception", e);
                 }
+            }
+
+
+            @Override
+            public void onViewProfile(String uid) {
+                startActivity(new Intent(getContext(), ProfileActivity.class).putExtra("uid", uid));
+            }
+
+            @Override
+            public void onBlock(String uid, int status) {
+                adapter.showLoadingFor(uid);
+                if (status == 2) friendViewModel.changeFriendStatus(thisuid, uid, -1, -1);
+                else friendViewModel.changeFriendStatus(thisuid, uid, 2, 1);
             }
         });
 
+        rvfriend.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvfriend.setAdapter(adapter);
+
+        friendViewModel.getFriendListLiveData().observe(getViewLifecycleOwner(), list -> {
+            adapter.setFriendList(list);
+            if (list.size()==0){tvempty.setVisibility(View.VISIBLE);}else{tvempty.setVisibility(View.GONE);}
+        });
+
+        friendViewModel.getIsLoadingLiveData().observe(getViewLifecycleOwner(), isLoading -> {
+            progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+        });
+
+        friendViewModel.getIsActionLoadingLiveData().observe(getViewLifecycleOwner(), isLoading -> {
+            if (!isLoading) adapter.showLoadingFor(null);
+        });
+
+        bsearch.setOnClickListener(v -> {
+            String keyword = esearch.getText().toString().trim();
+            friendViewModel.setKeyword(keyword);
+        });
+        if (radioGroup.getCheckedRadioButtonId()==R.id.tatca)friendViewModel.setFilterType("ALL");
+        else if (radioGroup.getCheckedRadioButtonId() == R.id.banbe) friendViewModel.setFilterType("FRIENDS");
+        else if (radioGroup.getCheckedRadioButtonId() == R.id.loimoi) friendViewModel.setFilterType("INVITES");
+        else if (radioGroup.getCheckedRadioButtonId() == R.id.chan) friendViewModel.setFilterType("BLOCKED");
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.tatca) friendViewModel.setFilterType("ALL");
+            else if (checkedId == R.id.banbe) friendViewModel.setFilterType("FRIENDS");
+            else if (checkedId == R.id.loimoi) friendViewModel.setFilterType("INVITES");
+            else if (checkedId == R.id.chan) friendViewModel.setFilterType("BLOCKED");
+        });
     }
-    public void getData() {
-        db.collection("userfriend")
-                .document(thisuid)
-                .collection(thisuid)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-                        for (QueryDocumentSnapshot document : querySnapshot){
-                            tatcalist.add( document.toObject(UserFriend.class));
-                        }
-
-                    }
-                    else {
-                        Utils.noti(getActivity(), "Lỗi kết nối");
-                    }
-                });
-
-
-
-
-
-
+    private int gettype(int i) {
+        if (i == 1 || i == 2) return -1;
+        if (i == 5) return 1;
+        return 0;
     }
-
-
-
 }

@@ -34,6 +34,7 @@ public class OtpSubmitActivity extends AppCompatActivity {
     String otpsummit;
     String otpid;
     int time=6000;
+    String uid;
 
     String phone;
     int trytime=4;
@@ -77,6 +78,8 @@ public class OtpSubmitActivity extends AppCompatActivity {
         otp6.addTextChangedListener(new OTPTextWatcher(otp6, otp6, otp5));
 
         phone=getIntent().getStringExtra("phone");
+        uid = getIntent().getStringExtra("uid");
+
         guiotp();
         btnxacnhan.setOnClickListener(v->{
             getdata();
@@ -86,8 +89,7 @@ public class OtpSubmitActivity extends AppCompatActivity {
                     public  void onSuccess(Otpdata result) {
 
                         Otpdata otpdata =  result;
-                        String hashotp = UtilsCrypto.md5(otpsummit);
-                            if (!otpdata.getOtp().equals(hashotp)) {
+                            if (!otpdata.getOtp().equals(otpsummit)) {
                             Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không đúng");
 
                         } else if (otpdata.getStatus()>=1) {
@@ -99,6 +101,7 @@ public class OtpSubmitActivity extends AppCompatActivity {
                         } else {
                             Utils.noti(OtpSubmitActivity.this,"Thành công");
                             Intent i1 = new Intent(OtpSubmitActivity.this, HomeActivity.class);
+                            Utils.savepref(OtpSubmitActivity.this, "logined", "uid", uid);
                             startActivity(i1);
                             finish();
                         }

@@ -41,12 +41,13 @@ public class FogotPassActivity extends AppCompatActivity {
         btnfogotpass.setOnClickListener(v->{
             getdata();
                 if (checkdata()){
-                    UtilsDB.check("userlogin", UtilsCrypto.md5(phone), new UtilsDB.CheckCallback() {
+                    UtilsDB.check("userlogin", phone, new UtilsDB.CheckCallback() {
                         @Override
                         public void onSuccess(String uid) {
                             if (uid != null){
                                 Intent i = new Intent(FogotPassActivity.this, OtpSubmitActivity.class);
                                 i.putExtra("phone",phone);
+                                i.putExtra("uid",uid);
                                 startActivity(i);
                                 finish();
 

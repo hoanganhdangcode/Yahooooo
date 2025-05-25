@@ -7,15 +7,11 @@
         android:topRightRadius="30dp"
         android:bottomLeftRadius="30dp"
         ></corners>
-    <gradient
-        android:startColor="@color/black"
-        android:endColor="#fe5552"
-        ></gradient>
+<solid
+    android:color="@color/df">
+</solid>
 
-    <stroke
-        android:width="2dp"
-        android:color="#ccc"
-        ></stroke>
+
 
 
 </shape>

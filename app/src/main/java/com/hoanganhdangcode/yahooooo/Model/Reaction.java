@@ -1,4 +1,4 @@
 package com.hoanganhdangcode.yahooooo.Model;
 
-public class UserGroupchat {
+public class Reaction {
 }
