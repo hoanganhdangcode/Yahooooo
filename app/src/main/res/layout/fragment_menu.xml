@@ -21,9 +21,8 @@
         android:src="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
         android:id="@+id/background">
-
-
     </ImageView>
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="150dp"
@@ -36,6 +35,7 @@
         android:layout_marginBottom="-60dp"
        app:layout_constraintBottom_toBottomOf="@id/background"
         android:src="@color/yellow"
+        android:scaleType="centerCrop"
         app:civ_border_color="@color/white"
         app:civ_border_width="5dp"
         android:id="@+id/avatar"
@@ -56,10 +56,63 @@
         android:id="@+id/username"
         >
     </TextView>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintEnd_toEndOf="@id/background"
+        android:src="@drawable/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_margin="15dp"
+        android:tint="@color/df"
+        android:id="@+id/editback"
+
+        ></ImageButton>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/avatar"
+
+        android:src="@drawable/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_margin="15dp"
+        android:tint="@color/df"
+        android:id="@+id/editavatar"
+
+        ></ImageButton>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/username"
+        app:layout_constraintTop_toTopOf="@id/username"
+        app:layout_constraintBottom_toBottomOf="@id/username"
+        android:src="@drawable/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_margin="15dp"
+        android:tint="@color/df"
+        android:id="@+id/editname"
+
+        ></ImageButton>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/description"
+        app:layout_constraintBottom_toBottomOf="@id/description"
+        app:layout_constraintStart_toEndOf="@id/description"
+        android:src="@drawable/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_margin="15dp"
+        android:tint="@color/df"
+        android:id="@+id/editdes"
+
+        ></ImageButton>
+
 
     <TextView
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintWidth_percent="0.8"
         android:maxLines="4"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -98,10 +151,11 @@ app:layout_constraintTop_toBottomOf="@id/nighttheme"
     app:layout_constraintEnd_toEndOf="parent"
     android:id="@+id/btnwall"
         android:layout_margin="10dp"
-        android:textColor="@color/text1"
+        android:textColor="@color/white"
     android:text="Xem trang cá nhân"
-        android:backgroundTint="@color/background3"
+        android:backgroundTint="@color/df"
         />
+
 
     <Button
         android:layout_width="match_parent"
@@ -109,24 +163,10 @@ app:layout_constraintTop_toBottomOf="@id/nighttheme"
         app:layout_constraintTop_toBottomOf="@id/btnwall"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/btnedit"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/background3"
-        android:textColor="@color/text1"
-
-
-        android:text="Sửa thông tin"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btnedit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/btnchangepass"
-        android:textColor="@color/text1"
+        android:textColor="@color/white"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/background3"
+        android:backgroundTint="@color/df"
 
         android:text="Đổi mật khẩu"/>
 
@@ -137,8 +177,8 @@ app:layout_constraintTop_toBottomOf="@id/nighttheme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/btnsignout"
-        android:backgroundTint="@color/background3"
-        android:textColor="@color/text1"
+        android:backgroundTint="@color/design_default_color_error"
+        android:textColor="@color/white"
         android:layout_margin="10dp"
         android:text="Đăng xuất"/>
 

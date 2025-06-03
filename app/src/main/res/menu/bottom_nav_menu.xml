@@ -14,19 +14,7 @@
         android:title="@string/nav_2"
         ></item>
 
-    <item
-        android:id="@+id/nav_feed"
-        android:icon="@drawable/ic_nav_feed"
-        app:itemBackground="@android:color/transparent"
-        android:title="@string/nav_3" />
 
-    <item
-        android:id="@+id/nav_notification"
-        android:icon="@drawable/ic_notification"
-        app:itemBackground="@android:color/transparent"
-
-        android:title="@string/nav_4"
-        />
 
     <item
         android:id="@+id/nav_menu"

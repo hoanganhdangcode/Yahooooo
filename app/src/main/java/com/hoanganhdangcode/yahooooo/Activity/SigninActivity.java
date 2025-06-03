@@ -28,7 +28,6 @@ import com.hoanganhdangcode.yahooooo.R;
 import com.hoanganhdangcode.yahooooo.Util.LocaleHelper;
 import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
-import com.hoanganhdangcode.yahooooo.Util.UtilsDB;
 import com.hoanganhdangcode.yahooooo.ViewModel.AuthViewModel;
 
 public class SigninActivity extends AppCompatActivity {

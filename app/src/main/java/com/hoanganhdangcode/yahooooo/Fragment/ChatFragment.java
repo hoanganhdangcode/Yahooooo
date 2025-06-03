@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,12 +34,11 @@ public class ChatFragment extends Fragment {
 
     private ChatViewModel chatViewModel;
     private ChatAdapter chatAdapter;
-
-    private EditText esearch;
-    private ImageButton searchIcon;
+    private SearchView searchView;
     private RadioGroup radioGroup;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private TextView tvempty;
 
     private String thisUid;
 
@@ -59,11 +60,12 @@ public class ChatFragment extends Fragment {
 
     private void initView(View view) {
 
-        esearch = view.findViewById(R.id.esearch);
-        searchIcon = view.findViewById(R.id.searchicon);
         radioGroup = view.findViewById(R.id.phanloai);
         recyclerView = view.findViewById(R.id.rvchat);
         progressBar = view.findViewById(R.id.progressbar);
+        searchView = view.findViewById(R.id.searchbut);
+        tvempty = view.findViewById(R.id.danhsachtrong);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         chatAdapter = new ChatAdapter(getContext(), new ArrayList<>(), chatId -> {
@@ -81,6 +83,8 @@ public class ChatFragment extends Fragment {
 
         chatViewModel.getChatDisplayLiveData().observe(getViewLifecycleOwner(), chatList -> {
             chatAdapter.setChatList(chatList);
+            chatAdapter.notifyDataSetChanged();
+            tvempty.setVisibility(chatList.isEmpty() ? View.VISIBLE : View.GONE);
         });
         chatViewModel.getIsLoading().observe(getViewLifecycleOwner(), isLoading -> {
             progressBar.setVisibility(isLoading ? View.VISIBLE:View.GONE);
@@ -89,19 +93,22 @@ public class ChatFragment extends Fragment {
 
     private void setupEvents() {
         chatViewModel.setFilter("ALL");
-        // Search
-        searchIcon.setOnClickListener(v -> {
-            String keyword = esearch.getText().toString().trim();
-            chatViewModel.setSearchKeyword(keyword);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                chatViewModel.setSearchKeyword(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                chatViewModel.setSearchKeyword(newText);
+                return true;
+            }
         });
 
-        esearch.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-                chatViewModel.setSearchKeyword(s.toString().trim());
-            }
-            @Override public void afterTextChanged(Editable s) {}
-        });
+
 
         // Filter                chatViewModel.setFilter("ALL");
         chatViewModel.setFilter("FRIEND");

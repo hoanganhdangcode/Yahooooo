@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private EditText editText;
-    private ImageButton btnSend, btngalery;
+    private ImageButton btnSend, btngalery,btnback;
     private MessageAdapter adapter;
     private MessageViewModel messageViewModel;
     private String chatId, currentUid;
@@ -72,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
         userStatus = findViewById(R.id.userstatus);
         btngalery = findViewById(R.id.library);
         emptychat = findViewById(R.id.emptychat);
+        btnback = findViewById(R.id.back);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
@@ -108,6 +109,10 @@ public class ChatActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Vui lòng nhập tin nhắn", Toast.LENGTH_SHORT).show();
             }
+
+        });
+        btnback.setOnClickListener(v -> {
+            finish();
         });
 
         btngalery.setOnClickListener(v -> {

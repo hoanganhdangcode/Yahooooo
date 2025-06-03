@@ -5,12 +5,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -18,8 +23,15 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Utils {
 
@@ -74,6 +86,10 @@ public static String getpref(Context context, String pref, String field){
 
 // Lưu lại
         editor.apply();
+    }
+    public static String getdeviceid(Context context) {
+
+    return  Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     public static String genOtp(){
@@ -162,6 +178,49 @@ public static String getpref(Context context, String pref, String field){
         return sdf.format(new Date(millis));
     }
 
+    public static void sendBulkNotification(List<String> tokens, String title, String message) {
+        new Thread(() -> {
+            try {
+                OkHttpClient client = new OkHttpClient();
+
+                JSONObject json = new JSONObject();
+
+                // Dùng "registration_ids" cho nhiều token
+                JSONArray tokenArray = new JSONArray();
+                for (String token : tokens) {
+                    tokenArray.put(token);
+                }
+                json.put("registration_ids", tokenArray);
+
+                JSONObject notification = new JSONObject();
+                notification.put("title", title);
+                notification.put("body", message);
+                json.put("notification", notification);
+
+                RequestBody body = RequestBody.create(
+                        json.toString(),
+                        MediaType.parse("application/json")
+                );
+
+                Request request = new Request.Builder()
+                        .url("https://fcm.googleapis.com/fcm/send")
+                        .post(body)
+                        .addHeader("Authorization", "key=YOUR_SERVER_KEY")
+                        .addHeader("Content-Type", "application/json")
+                        .build();
+
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    Log.d("FCM", "Bulk notification sent successfully");
+                } else {
+                    Log.e("FCM", "Failed to send bulk notification: " + response.message());
+                }
+
+            } catch (Exception e) {
+                Log.e("FCM", "Error", e);
+            }
+        }).start();
+    }
 
 
 }

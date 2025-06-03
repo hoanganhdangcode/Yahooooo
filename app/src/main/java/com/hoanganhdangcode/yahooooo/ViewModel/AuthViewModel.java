@@ -17,6 +17,16 @@ public class AuthViewModel extends ViewModel {
 
     private final MutableLiveData<Boolean> loginSuccess = new MutableLiveData<>();
     private final MutableLiveData<String> loginMessage = new MutableLiveData<>();
+
+    private final MutableLiveData<Boolean> checkSuccess = new MutableLiveData<>();
+    private final MutableLiveData<String> checkMessage = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> updateSuccess = new MutableLiveData<>();
+    private final MutableLiveData<String> updateMessage = new MutableLiveData<>();
+    public LiveData<Boolean> getCheckSuccess() { return checkSuccess; }
+    public LiveData<String> getCheckMessage() { return checkMessage; }
+    public LiveData<Boolean> getUpdateSuccess() { return updateSuccess; }
+    public LiveData<String> getUpdateMessage() { return updateMessage; }
+
     private final MutableLiveData<String> loginUid = new MutableLiveData<>();
     public LiveData<String> getLoginUid() { return loginUid; }
 
@@ -73,6 +83,44 @@ public class AuthViewModel extends ViewModel {
 
             }
 
+            });
+        }
+
+        public void checkpass(String currentUid, String oldpass) {
+            isLoading.setValue(true); // Bắt đầu loading
+            repository.checkpass(currentUid, oldpass, new AuthRepository.CheckPassCallback() {
+                @Override
+                public void onSuccess() {
+                    isLoading.postValue(false);
+                    checkMessage.postValue("Mật khẩu chính xác");
+                    checkSuccess.postValue(true);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    isLoading.postValue(false);
+                    checkSuccess.postValue(false);
+                    checkMessage.postValue(e.getMessage());
+                }
+            });
+
+        }
+        public void updatePass(String currentUid, String newPass) {
+            isLoading.setValue(true); // Bắt đầu loading
+            repository.updatePass(currentUid, newPass, new AuthRepository.UpdatePassCallback() {
+                @Override
+                public void onSuccess() {
+                    isLoading.postValue(false);
+                    updateMessage.postValue("Cập nhật mật khẩu thành công");
+                    updateSuccess.postValue(true);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    isLoading.postValue(false);
+                    updateMessage.postValue(e.getMessage());
+                    updateSuccess.postValue(false);
+                }
             });
         }
 

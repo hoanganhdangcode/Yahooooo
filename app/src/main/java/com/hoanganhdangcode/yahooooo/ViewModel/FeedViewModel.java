@@ -20,7 +20,6 @@ public class FeedViewModel extends AndroidViewModel {
         super(application);
         repository = new FeedRepository(application);
     }
-
     public LiveData<List<UserPost>> getPostList() {
         return repository.getPostListLiveData();
     }

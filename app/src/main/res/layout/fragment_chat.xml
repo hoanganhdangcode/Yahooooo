@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background2"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         android:backgroundTint="@color/background3"
         android:layout_margin="10dp"
         android:id="@+id/searchview"
+        android:visibility="gone"
         >
         <ImageButton
             android:layout_width="40dp"
@@ -29,7 +31,9 @@
             android:padding="5dp"
             >
 
+
         </ImageButton>
+
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,7 +57,7 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchview"
+        app:layout_constraintTop_toBottomOf="@id/searchbut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/phanloai"
@@ -69,7 +73,7 @@
             android:text="Tất cả"
             android:gravity="center"
             android:background="@drawable/radiobackgroundcolor"
-            android:textColor="@color/text1"
+            android:textColor="@color/radiotextcolor"
             android:button="@android:color/transparent"
             android:id="@+id/tatca"
             ></RadioButton>
@@ -115,8 +119,9 @@
     </RadioGroup>
     <ProgressBar
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/phanloai"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/progressbar"
@@ -134,9 +139,60 @@
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/rvchat"
        >
-
-
     </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Danh sách trống"
+        app:layout_constraintTop_toBottomOf="@id/phanloai"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/danhsachtrong"
+        android:visibility="gone"/>
+
+    <SearchView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:paddingVertical="10dp"
+        android:id="@+id/searchbut"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="22dp"
+        app:layout_constraintTop_toBottomOf="@id/phanloai"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        android:textColorHint="@color/text1"
+        android:queryHint="Tìm kiếm..."
+        app:iconifiedByDefault="true"
+        android:elevation="10dp"
+        android:background="@drawable/radiusitembox"
+        android:backgroundTint="@color/background2"
+        android:queryBackground="@color/background2"
+
+        />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Yaooooo!"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="@id/searchbut"
+        app:layout_constraintBottom_toBottomOf="@id/searchbut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAlignment="textStart"
+        android:textColor="@color/df"
+        android:fontFamily="@font/font1"
+        android:letterSpacing="0.05"
+        android:layout_marginStart="25dp"
+        android:lines="1"
+        android:background="@android:color/transparent"
+        android:textStyle="bold"
+        >
+    </TextView>
 
 
 

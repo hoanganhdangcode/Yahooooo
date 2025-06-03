@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,14 +32,13 @@ import java.util.ArrayList;
 
 public class FriendFragment extends Fragment {
     private String thisuid;
-    private EditText esearch;
-    private ImageButton bsearch, btnsearchfriend;
     private RadioGroup radioGroup;
     private RecyclerView rvfriend;
     private ProgressBar progressBar;
     private FriendAdapter adapter;
     private FriendViewModel friendViewModel;
     private ChatRepository chatRepository;
+    private SearchView searchView;
 
     TextView tvempty;
 
@@ -58,12 +58,13 @@ public class FriendFragment extends Fragment {
         thisuid = new Utils().getpref(getContext(), "logined", "uid");
         friendViewModel = new ViewModelProvider(this).get(FriendViewModel.class);
         friendViewModel.setCurrentUid(thisuid);
-        esearch = view.findViewById(R.id.esearch);
-        bsearch = view.findViewById(R.id.searchicon);
+
         radioGroup = view.findViewById(R.id.phanloai);
         rvfriend = view.findViewById(R.id.friendlist);
         progressBar = view.findViewById(R.id.progressbar);
         tvempty = view.findViewById(R.id.danhsachtrong);
+        searchView = view.findViewById(R.id.searchbut);
+
 
         adapter = new FriendAdapter(getContext(), new ArrayList<>(), new FriendAdapter.OnFriendActionListener() {
             @Override
@@ -135,10 +136,18 @@ public class FriendFragment extends Fragment {
         friendViewModel.getIsActionLoadingLiveData().observe(getViewLifecycleOwner(), isLoading -> {
             if (!isLoading) adapter.showLoadingFor(null);
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                friendViewModel.setKeyword(query);
+                return true;
+            }
 
-        bsearch.setOnClickListener(v -> {
-            String keyword = esearch.getText().toString().trim();
-            friendViewModel.setKeyword(keyword);
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                friendViewModel.setKeyword(newText);
+                return true;
+            }
         });
         if (radioGroup.getCheckedRadioButtonId()==R.id.tatca)friendViewModel.setFilterType("ALL");
         else if (radioGroup.getCheckedRadioButtonId() == R.id.banbe) friendViewModel.setFilterType("FRIENDS");

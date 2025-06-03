@@ -96,6 +96,8 @@ public class MessageViewModel extends ViewModel {
         loadMessages();
     }
 
+
+
     private void loadMessages() {
         repository.listenMessages(chatId, currentUid, list -> {
             messagesLiveData.postValue(list);
@@ -122,6 +124,7 @@ public class MessageViewModel extends ViewModel {
         }
     }
 
+
     public void sendMessage( UserMessage message) {
         repository.sendMessage(appContext,message);
     }
@@ -132,7 +135,6 @@ public class MessageViewModel extends ViewModel {
 
     public void resume( ) {
         repository.resume();
-
     }
 
     public LiveData<List<UserMessage>> getMessages() {

@@ -26,13 +26,13 @@
         android:layout_marginStart="-50dp"
         ></de.hdodenhof.circleimageview.CircleImageView>
     <ImageButton
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@android:color/transparent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         android:src="@drawable/night"
         android:scaleType="centerCrop"
         android:id="@+id/nightmode"
@@ -196,7 +196,6 @@
         app:ccp_showFullName="false"
         app:ccp_showNameCode="false"
         >
-
     </com.hbb20.CountryCodePicker>
 
     <com.google.android.material.textfield.TextInputLayout

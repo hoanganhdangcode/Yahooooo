@@ -18,6 +18,8 @@ import java.sql.Ref;
 public class AuthRepository {
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
+
+
     public interface SignupCallback {
         void onSuccess(String uid);
 
@@ -88,10 +90,63 @@ public class AuthRepository {
 
                 }
 
+                public interface CheckPassCallback {
+                    void onSuccess();
+                    void onFailure(Exception e);
+                }
+                public void checkpass(String currentUid, String oldpass, CheckPassCallback callback) {
+                    firestore.collection("userlogin")
+                            .document(currentUid)
+                            .get()
+                            .addOnSuccessListener(document -> {
+                                if (document.exists()) {
+                                    UserLogin userLogin = document.toObject(UserLogin.class);
+                                    String hashedPass = UtilsCrypto.md5(oldpass + userLogin.getSalt());
+                                    if (hashedPass.equals(userLogin.getHashpass())) {
+                                        callback.onSuccess();
+                                    } else {
+                                        callback.onFailure(new Exception("Mật khẩu không chính xác"));
+                                    }
+                                } else {
+                                    callback.onFailure(new Exception("Tài khoản không tồn tại"));
+                                }
+                            })
+                            .addOnFailureListener(e -> callback.onFailure(new Exception("Lỗi truy vấn")));
+                }
+                public interface UpdatePassCallback {
+                    void onSuccess();
+                    void onFailure(Exception e);
+                }
+                public void updatePass(String currentUid, String newPass, UpdatePassCallback callback) {
+                    firestore.collection("userlogin")
+                            .document(currentUid)
+                            .get()
+                            .addOnSuccessListener(document -> {
+                                if (document.exists()) {
+                                    UserLogin userLogin = document.toObject(UserLogin.class);
+                                    String newSalt = null;
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        newSalt = Utils.genSalt();
+                                    }
+                                    String newHashedPass = UtilsCrypto.md5(newPass + newSalt);
+                                    userLogin.setHashpass(newHashedPass);
+                                    userLogin.setSalt(newSalt);
+
+                                    firestore.collection("userlogin")
+                                            .document(currentUid)
+                                            .set(userLogin)
+                                            .addOnSuccessListener(unused -> callback.onSuccess())
+                                            .addOnFailureListener(e -> callback.onFailure(new Exception("Cập nhật mật khẩu thất bại")));
+                                } else {
+                                    callback.onFailure(new Exception("Tài khoản không tồn tại"));
+                                }
+                            })
+                            .addOnFailureListener(e -> callback.onFailure(new Exception("Lỗi truy vấn")));
+                }
 
 
 
 
-    }
+}
 
 

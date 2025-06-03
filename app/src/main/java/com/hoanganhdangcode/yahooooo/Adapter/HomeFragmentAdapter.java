@@ -28,12 +28,11 @@ public class HomeFragmentAdapter extends FragmentStateAdapter {
         switch (position) {
             case 0: return new ChatFragment();
             case 1: return new FriendFragment();
-            case 2: return new FeedFragment();
-            case 3: return new NotificationFragment();
-            case 4: return new MenuFragment();
-            default: return new FeedFragment();
+//            case 2: return new FeedFragment();
+//            case 3: return new NotificationFragment();
+            case 2: return new MenuFragment();
+            default: return new ChatFragment();
         }
-
     }
 
     @Override

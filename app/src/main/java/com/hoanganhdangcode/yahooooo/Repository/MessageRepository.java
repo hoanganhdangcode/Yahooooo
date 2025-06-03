@@ -15,7 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanganhdangcode.yahooooo.Model.UserMessage;
+import com.hoanganhdangcode.yahooooo.Service.NotificationServices;
 import com.hoanganhdangcode.yahooooo.Service.SendMediaMessageService;
+import com.hoanganhdangcode.yahooooo.Util.Utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -91,6 +93,41 @@ public class MessageRepository {
         messageCache.sort(Comparator.comparingLong(UserMessage::getTimestamp));
     }
 
+    public void getTokenNoti(String uid, String chatId, OnTokenNotiLoaded callback) {
+        firestoreDb.collection("userchat")
+                .document(uid)
+                .collection("chat")
+                .document(chatId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        List<String> tokens = new ArrayList<>();
+                        firestoreDb.collection("token")
+                                .whereEqualTo("uid", documentSnapshot.getString("uid2"))
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    tokens.add(documentSnapshot.getString("token"));
+                                    callback.onLoaded(tokens);
+                                })
+                                .addOnFailureListener(e -> {
+                                            Log.e("MessageRepository", "Error getting tokens: ", e);
+                                            callback.onError("Failed to get tokens: " + e.getMessage());
+                                        }
+                                );
+                    } else {
+                        callback.onError("Chat document does not exist");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("MessageRepository", "Error getting tokens: ", e);
+                    callback.onError("Failed to get chat document: " + e.getMessage());
+                });
+
+    }
+    public interface OnTokenNotiLoaded {
+        void onLoaded(List<String> tokens);
+        void onError(String error);
+    }
     public void sendMessage(Context context, UserMessage message) {
         realtimeDb.child("messages")
                 .child(message.getChatid())
@@ -102,14 +139,31 @@ public class MessageRepository {
         }
 
         firestoreDb.collection("chatbox").document(message.getChatid())
-                .update("lastmessage", message.getType() == 1 ? message.getContent() : "File phương tiện");
+                .update("lastmessage", message.getType() == 1 ? message.getContent() : "Đã gửi một tệp đính kèm");
         firestoreDb.collection("chatbox").document(message.getChatid())
                 .update("lasttimestamp", message.getTimestamp());
 
         getSenderInfo(message.getSender(), (uid, name, avatar) ->{
             firestoreDb.collection("chatbox").document(message.getChatid())
                     .update("userlast", name != null ? name : "Không rõ");
+            getTokenNoti(message.getSender(), message.getChatid(), new OnTokenNotiLoaded() {
+                @Override
+                public void onLoaded(List<String> tokens) {
+                    if (!tokens.isEmpty()) {
+                        Utils.sendBulkNotification(tokens,"Tin nhắn mới",name +": "+ (message.getType()==1? message.getContent():"Đã gửi một tệp đính kèm"));
+                        Log.d("MessageRepository", "sendMessage: tokens size: " + tokens.size());
+                    }
+
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            });
         });
+
+
     }
 
         public void getSenderInfo(String uid, OnSenderInfoLoaded callback) {

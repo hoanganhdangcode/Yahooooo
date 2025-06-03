@@ -89,19 +89,21 @@ public class OtpSubmitActivity extends AppCompatActivity {
                     public  void onSuccess(Otpdata result) {
 
                         Otpdata otpdata =  result;
-                            if (!otpdata.getOtp().equals(otpsummit)) {
+                        String otphashed = UtilsCrypto.md5(otpsummit);
+
+                            if (!otpdata.getOtp().equals(otphashed)) {
                             Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không đúng");
 
                         } else if (otpdata.getStatus()>=1) {
                             Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không hợp lệ");
 
                         }
-                        else if (System.currentTimeMillis() > otpdata.getTimestamp()+50000) {
+                        else if (System.currentTimeMillis() > otpdata.getTimestamp()+2*60*1000) { // 2 phút
                             Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP đã hết hạn");
                         } else {
                             Utils.noti(OtpSubmitActivity.this,"Thành công");
-                            Intent i1 = new Intent(OtpSubmitActivity.this, HomeActivity.class);
-                            Utils.savepref(OtpSubmitActivity.this, "logined", "uid", uid);
+                            Intent i1 = new Intent(OtpSubmitActivity.this, ChangePass.class);
+                            i1.putExtra("uid", uid);
                             startActivity(i1);
                             finish();
                         }
@@ -179,7 +181,7 @@ public class OtpSubmitActivity extends AppCompatActivity {
     public void getdata(){
 
         otpsummit = otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString()+otp5.getText().toString()+otp6.getText().toString();
-        Utils.noti(OtpSubmitActivity.this,"otpsubmit: "+otpsummit);
+//        Utils.noti(OtpSubmitActivity.this,"otpsubmit: "+otpsummit);
     }
     public boolean checkdata(){
 

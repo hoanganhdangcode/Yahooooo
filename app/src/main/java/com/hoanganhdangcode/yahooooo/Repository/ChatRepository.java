@@ -35,6 +35,7 @@ public class ChatRepository {
                     }
 
                     Map<String, UserChat> userChatMap = new HashMap<>();
+
                     for (DocumentSnapshot doc : chatSnapshots) {
                         UserChat uc = doc.toObject(UserChat.class);
                         if (uc != null) userChatMap.put(uc.getChatid(), uc);
