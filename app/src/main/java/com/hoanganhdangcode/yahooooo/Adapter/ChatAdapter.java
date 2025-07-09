@@ -58,7 +58,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         holder.timestamp.setText(Utils.formatTime(chat.getLasttimestamp()));
         Glide.with(context)
                 .load(chat.getAvatar())
-                .placeholder(R.drawable.avartarerror)
+                .placeholder(R.drawable.avatardefault)
                 .into(holder.avatar);
         holder.itemView.setOnClickListener(v -> listener.onChatClick(chat.getChatid()));
     }

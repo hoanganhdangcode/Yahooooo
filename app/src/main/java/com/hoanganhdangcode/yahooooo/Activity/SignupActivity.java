@@ -67,8 +67,7 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show());
         viewModel.getSignupSuccess().observe(this, success -> {
             if (success) {
-//                Intent i= new Intent(SignupActivity.this,HomeActivity.class);
-//                Utils.savepref(SignupActivity.this,"logined","uid",viewModel.getLoginUid().getValue());
+//                Intent i= new Intent(SignupActivity.this,SigninActivity.class);
 //                startActivity(i);
 //                finish();
             }

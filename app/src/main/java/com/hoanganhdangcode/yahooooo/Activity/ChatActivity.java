@@ -1,5 +1,12 @@
 package com.hoanganhdangcode.yahooooo.Activity;
 
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.accesstoken;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.id;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.serverip;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.tokensaphethan;
+import static com.hoanganhdangcode.yahooooo.Util.HttpUtils.getJsonWithToken;
+import static com.hoanganhdangcode.yahooooo.Util.HttpUtils.postJsonWithToken;
+
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,14 +33,22 @@ import com.bumptech.glide.Glide;
 import com.hoanganhdangcode.yahooooo.Adapter.MessageAdapter;
 import com.hoanganhdangcode.yahooooo.Model.UserMessage;
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 import com.hoanganhdangcode.yahooooo.ViewModel.MessageViewModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -46,6 +61,7 @@ public class ChatActivity extends AppCompatActivity {
     private CircleImageView chatImage;
     private TextView chatName, userStatus, emptychat;
     private ActivityResultLauncher<Intent> mediaPickerLauncher;
+    boolean isOnline = false; // Biến để theo dõi trạng thái online
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatId = getIntent().getStringExtra("chatid");
-        currentUid = new Utils().getpref(this, "logined", "uid");
+        currentUid = AppMng.id+""  ;
 
         initView();
         setupViewModel();
@@ -78,6 +94,17 @@ public class ChatActivity extends AppCompatActivity {
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(false);
         recyclerView.setLayoutManager(layoutManager);
+        String uids[]  = chatId.split("_");
+        if (uids.length == 2) {
+            if (uids[0].equals(currentUid)) {
+                checktoken(uids[1]);
+            } else {
+                checktoken(uids[0]);
+            }
+        } else {
+            userStatus.setVisibility(View.GONE);
+        }
+
     }
 
     private void setupViewModel() {
@@ -86,7 +113,7 @@ public class ChatActivity extends AppCompatActivity {
         messageViewModel.getdatachat(currentUid, chatId);
 
         messageViewModel.getNamechat().observe(this, chatName::setText);
-        messageViewModel.getAvatarchat().observe(this, avatar -> Glide.with(this).load(avatar).into(chatImage));
+        messageViewModel.getAvatarchat().observe(this, avatar -> Glide.with(this).load(avatar).placeholder(R.drawable.avatardefault).into(chatImage));
 
         messageViewModel.getMessages().observe(this, messages -> {
             if (adapter == null) {
@@ -122,6 +149,72 @@ public class ChatActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             mediaPickerLauncher.launch(intent);
+        });
+    }
+    public void checktoken(String uid){
+        if(AppMng.tokenhethan()){
+            AppMng.refreshtokendata(new AppMng.RefreshCallback() {
+                @Override
+                public void onRefreshSuccess(long id, String accessToken, String refreshToken) {
+                    Log.d("MenuFragment", "Access token refreshed successfully: " + accessToken);
+                    checkonline(accessToken,uid);
+                }
+
+
+                @Override
+                public void onRefreshFailure() {
+                    Log.d("MenuFragment", "Access token refresh failed");
+                }
+            });
+        }
+        else{
+            checkonline(accesstoken,uid);
+            if (tokensaphethan()){AppMng.refreshtokendata(new AppMng.RefreshCallback() {
+                @Override
+                public void onRefreshSuccess(long id, String accessToken, String refreshToken) {
+
+                    Log.d("MenuFragment", "Access token refreshed successfully: " + accessToken);
+                }
+
+                @Override
+                public void onRefreshFailure() {
+                    Log.d("MenuFragment", "Access token refresh failed");
+                }
+
+            });}
+        }
+
+    }
+    private void checkonline (String actk,String uid){
+        getJsonWithToken("http://" + serverip + ":8080/getonline?userid="+uid+"", actk, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("GETONLINE", "Lỗi kết nối: " + e.getMessage());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String res = response.body().string();
+                    // xử lý JSON ở đây
+                    try {
+                        JSONObject obj = new JSONObject(res);
+                        boolean online = obj.getBoolean("online");
+                        if (online) {
+                            isOnline = true;
+                            userStatus.setText("Online");
+                        } else {
+                            isOnline = false;
+                            userStatus.setText("Ofline");
+                        }
+
+
+                    } catch (JSONException e) {
+                        Log.e("POST", "Lỗi phân tích JSON: " + e.getMessage());
+                    }
+                } else {
+                    Log.e("POST", "Lỗi server: " + response.code());
+                }
+            }
         });
     }
 

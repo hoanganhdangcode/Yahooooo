@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.hoanganhdangcode.yahooooo.Repository.AuthRepository;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
 
 public class AuthViewModel extends ViewModel {
     private final AuthRepository repository = new AuthRepository();
@@ -27,8 +28,7 @@ public class AuthViewModel extends ViewModel {
     public LiveData<Boolean> getUpdateSuccess() { return updateSuccess; }
     public LiveData<String> getUpdateMessage() { return updateMessage; }
 
-    private final MutableLiveData<String> loginUid = new MutableLiveData<>();
-    public LiveData<String> getLoginUid() { return loginUid; }
+
 
 
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
@@ -47,7 +47,6 @@ public class AuthViewModel extends ViewModel {
         repository.signup(name, gender, birth, phone, password, new AuthRepository.SignupCallback() {
             @Override
             public void onSuccess(String uid) {
-                loginUid.postValue(uid);
                 isLoading.postValue(false);
                 signupSuccess.postValue(true);
                 signupMessage.postValue("Đăng ký thành công");
@@ -66,8 +65,10 @@ public class AuthViewModel extends ViewModel {
         isLoading.setValue(true); // Bắt đầu loading
         repository.signin( phone,  password, new AuthRepository.SigninCallback(){
             @Override
-            public void onSuccess(String uid) {
-            loginUid.postValue(uid);
+            public void onSuccess(long jid,  String jaccessToken,  String jrefreshToken) {
+                AppMng.id = jid;
+                AppMng.accesstoken = jaccessToken;
+                AppMng.refreshtoken = jrefreshToken;
             isLoading.postValue(false);
             loginSuccess.postValue(true);
             loginMessage.postValue("Đăng nhập thành công");
@@ -75,12 +76,9 @@ public class AuthViewModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-
                 isLoading.postValue(false);
                 loginSuccess.postValue(false);
                 loginMessage.postValue(e.getMessage());
-                loginUid.postValue(null);
-
             }
 
             });
@@ -105,9 +103,9 @@ public class AuthViewModel extends ViewModel {
             });
 
         }
-        public void updatePass(String currentUid, String newPass) {
+        public void updatePass(String newPass) {
             isLoading.setValue(true); // Bắt đầu loading
-            repository.updatePass(currentUid, newPass, new AuthRepository.UpdatePassCallback() {
+            repository.updatePass( newPass, new AuthRepository.UpdatePassCallback() {
                 @Override
                 public void onSuccess() {
                     isLoading.postValue(false);

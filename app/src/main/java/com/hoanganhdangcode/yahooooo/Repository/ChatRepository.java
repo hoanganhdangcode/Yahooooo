@@ -1,20 +1,39 @@
 package com.hoanganhdangcode.yahooooo.Repository;
 
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.accesstoken;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.serverip;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.tokensaphethan;
+import static com.hoanganhdangcode.yahooooo.Util.HttpUtils.getJsonWithToken;
+
+import android.content.Intent;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
+import com.hoanganhdangcode.yahooooo.Activity.ChatActivity;
+import com.hoanganhdangcode.yahooooo.Activity.SplashActivity;
 import com.hoanganhdangcode.yahooooo.Model.Chat;
 import com.hoanganhdangcode.yahooooo.Model.ChatDisplay;
 import com.hoanganhdangcode.yahooooo.Model.UserChat;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class ChatRepository {
 
@@ -24,6 +43,7 @@ public class ChatRepository {
         void onComplete(List<ChatDisplay> list);
         void onFailure(Exception e);
     }
+
 
     public void loadChat(String uid, loadChatCallback callback) {
         db.collection("userchat").document(uid).collection("chat")
@@ -177,4 +197,5 @@ public class ChatRepository {
             if (callback != null) callback.onFailure(e);
         });
     }
+
 }

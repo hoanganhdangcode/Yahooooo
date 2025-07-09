@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 import com.hoanganhdangcode.yahooooo.ViewModel.AuthViewModel;
 
@@ -34,10 +35,11 @@ public class ChangePass extends AppCompatActivity {
             return insets;
 
         });
-        currentUid = getIntent().getStringExtra("uid");
-        if (currentUid == null) {
-            finish();
-        }
+        Utils.noti(ChangePass.this, "Bạn có 5 phút để đổi mật khẩu");
+//        currentUid = getIntent().getStringExtra("uid");
+//        if (currentUid == null) {
+//            finish();
+//        }
         ePassword = findViewById(R.id.epassword);
         econfirmPassword = findViewById(R.id.econfirmpassword);
         buttonConfirm = findViewById(R.id.btnxacnhan);
@@ -75,7 +77,8 @@ public class ChangePass extends AppCompatActivity {
                 econfirmPassword.setError("Mật khẩu không khớp");
                 return;
             }
-           authViewModel.updatePass(currentUid, ePassword.getText().toString());
+
+           authViewModel.updatePass(ePassword.getText().toString());
         });
         buttonCancel.setOnClickListener(v -> {
             finish();

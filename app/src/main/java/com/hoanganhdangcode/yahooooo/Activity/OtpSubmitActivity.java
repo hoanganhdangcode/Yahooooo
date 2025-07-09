@@ -1,26 +1,43 @@
 package com.hoanganhdangcode.yahooooo.Activity;
 
+import static com.hoanganhdangcode.yahooooo.Activity.SplashActivity.TAG;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.serverip;
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.tokenchangepass;
+import static com.hoanganhdangcode.yahooooo.Util.HttpUtils.postJsonWithToken;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.hoanganhdangcode.yahooooo.Model.OtpRequest;
-import com.hoanganhdangcode.yahooooo.Model.Otpdata;
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
+import com.hoanganhdangcode.yahooooo.Util.HttpUtils;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
-import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
 import com.hoanganhdangcode.yahooooo.Util.UtilsDB;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class OtpSubmitActivity extends AppCompatActivity {
     private EditText otp1;
@@ -80,46 +97,42 @@ public class OtpSubmitActivity extends AppCompatActivity {
         phone=getIntent().getStringExtra("phone");
         uid = getIntent().getStringExtra("uid");
 
-        guiotp();
+//        guiotp();
         btnxacnhan.setOnClickListener(v->{
             getdata();
             if (checkdata()){
-                UtilsDB.read("otp", otpid, Otpdata.class, new UtilsDB.ReadCallback<Otpdata>() {
+                Log.d(TAG, "Xác nhận OTP: " + otpsummit);
+                String json = "{\"id\":" + AppMng.id + ",\"otpsubmit\":\"" + otpsummit + "\"}";
+
+
+                HttpUtils.postJson("http://" + serverip + ":8080/auth/verifyotp", json, new Callback() {
                     @Override
-                    public  void onSuccess(Otpdata result) {
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("POST", "Lỗi kết nối: " + e.getMessage());
+                    }
 
-                        Otpdata otpdata =  result;
-                        String otphashed = UtilsCrypto.md5(otpsummit);
-
-                            if (!otpdata.getOtp().equals(otphashed)) {
-                            Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không đúng");
-
-                        } else if (otpdata.getStatus()>=1) {
-                            Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không hợp lệ");
-
-                        }
-                        else if (System.currentTimeMillis() > otpdata.getTimestamp()+2*60*1000) { // 2 phút
-                            Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP đã hết hạn");
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String res = response.body().string();
+                            // xử lý JSON ở đây
+                            try {
+                                JSONObject obj = new JSONObject(res);
+                                tokenchangepass = obj.getString("token");
+                                runOnUiThread(() -> {
+                                    Utils.noti(OtpSubmitActivity.this, "Đã gửi OTP đến số điện thoại " + phone);
+                                    Intent intent = new Intent(OtpSubmitActivity.this, ChangePass.class);
+                                    startActivity(intent);
+                                    finish();
+                                });
+                            } catch (JSONException e) {
+                                Log.e("POST", "Lỗi phân tích JSON: " + e.getMessage());
+                            }
                         } else {
-                            Utils.noti(OtpSubmitActivity.this,"Thành công");
-                            Intent i1 = new Intent(OtpSubmitActivity.this, ChangePass.class);
-                            i1.putExtra("uid", uid);
-                            startActivity(i1);
-                            finish();
+                            Log.e("POST", "Lỗi server: " + response.code());
                         }
-
-                    }
-                    @Override
-                    public void onNotFound(){
-                        Utils.noti(OtpSubmitActivity.this, "Lỗi: mã OTP không tồn tại");
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-
                     }
                 });
-
 
             }
         });
@@ -186,31 +199,30 @@ public class OtpSubmitActivity extends AppCompatActivity {
     public boolean checkdata(){
 
         boolean kt=true;
-        if (phone==null){kt=false;}
-        if (otp1.equals("")){
-            otp1.setError("Vui lòng nhập mã OTP");
-            kt= false;
-        }
-        if (otp2.equals("")){
-            otp2.setError("Vui lòng nhập mã OTP");
-            kt= false;
-        }
-        if (otp3.equals("")){
-            otp3.setError("Vui lòng nhập mã OTP");
-            kt= false;
-        }
-        if (otp4.equals("")){
-            otp4.setError("Vui lòng nhập mã OTP");
-            kt= false;
-        }
-        if (otp5.equals("")){
-            otp5.setError("Vui lòng nhập mã OTP");
-            kt=false;
-        }
-        if (otp6.equals("")){
-            otp6.setError("Vui lòng nhập mã OTP");
-            kt=false;
-        }
+//        if (otp1.getText().equals("")){
+//            otp1.setError("Vui lòng nhập mã OTP");
+//            kt= false;
+//        }
+//        if (otp2.getText().equals("")){
+//            otp2.setError("Vui lòng nhập mã OTP");
+//            kt= false;
+//        }
+//        if (otp3.equals("")){
+//            otp3.setError("Vui lòng nhập mã OTP");
+//            kt= false;
+//        }
+//        if (otp4.equals("")){
+//            otp4.setError("Vui lòng nhập mã OTP");
+//            kt= false;
+//        }
+//        if (otp5.equals("")){
+//            otp5.setError("Vui lòng nhập mã OTP");
+//            kt=false;
+//        }
+//        if (otp6.equals("")){
+//            otp6.setError("Vui lòng nhập mã OTP");
+//            kt=false;
+//        }
         if (otpsummit.length()!=6){
             kt=false;
             btnxacnhan.setError("Lỗi dữ liệu");

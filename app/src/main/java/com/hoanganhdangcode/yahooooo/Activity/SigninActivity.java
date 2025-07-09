@@ -1,5 +1,6 @@
 package com.hoanganhdangcode.yahooooo.Activity;
 
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.id;
 import static java.lang.System.exit;
 
 import android.content.Intent;
@@ -25,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.hbb20.CountryCodePicker;
 import com.hoanganhdangcode.yahooooo.Model.UserLogin;
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
 import com.hoanganhdangcode.yahooooo.Util.LocaleHelper;
 import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
@@ -99,14 +101,20 @@ public class SigninActivity extends AppCompatActivity {
         authViewModel.getLoginSuccess().observe(this, success -> {
             if (success) {
                 Intent i= new Intent(SigninActivity.this,HomeActivity.class);
-                Utils.savepref(SigninActivity.this,"logined","uid",authViewModel.getLoginUid().getValue());
+                SharedPreferences preferences = getSharedPreferences("logined", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putLong("id", id);
+                editor.putString("uid",String.valueOf(id));
+                editor.putBoolean("logined", true);
+                editor.putString("accesstoken", AppMng.accesstoken);
+                editor.putString("refreshtoken", AppMng.refreshtoken);
+                editor.apply();
                 startActivity(i);
                 finish();
             }
         });
         authViewModel.getIsLoading().observe(this, isLoading -> {
             btnsignin.setText(isLoading?"":"Đăng nhập");
-
             btnsignin.setEnabled(isLoading?false:true);
             progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         });

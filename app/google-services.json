@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "518230999205",
+    "firebase_url": "https://ooo-6027e-default-rtdb.firebaseio.com",
+    "project_id": "ooo-6027e",
+    "storage_bucket": "ooo-6027e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518230999205:android:c030e62ae2df6e18ab8d4c",
+        "android_client_info": {
+          "package_name": "com.example.demoandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcB2PO_rm2mN8JijyuDEMHY0NDUKa0HsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518230999205:android:a8914cf3e69e793aab8d4c",
+        "android_client_info": {
+          "package_name": "com.hoanganhdangcode.yahooooo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcB2PO_rm2mN8JijyuDEMHY0NDUKa0HsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

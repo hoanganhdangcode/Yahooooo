@@ -67,13 +67,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/userstatus"
             android:textSize="14sp"
-            android:text="online"
+            android:text="Offline"
             android:textColor="@color/text1"
             app:layout_constraintTop_toBottomOf="@id/chatname"
             app:layout_constraintStart_toStartOf="@id/chatname"
             app:layout_constraintEnd_toEndOf="@id/chatname"
             android:lines="1"
-            android:visibility="gone"
+            android:visibility="visible"
             >
         </TextView>
 

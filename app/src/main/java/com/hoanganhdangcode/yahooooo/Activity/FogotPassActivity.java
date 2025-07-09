@@ -1,7 +1,10 @@
 package com.hoanganhdangcode.yahooooo.Activity;
 
+import static com.hoanganhdangcode.yahooooo.Util.AppMng.serverip;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -12,15 +15,27 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.hoanganhdangcode.yahooooo.R;
+import com.hoanganhdangcode.yahooooo.Util.AppMng;
+import com.hoanganhdangcode.yahooooo.Util.HttpUtils;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 import com.hoanganhdangcode.yahooooo.Util.UtilsCrypto;
 import com.hoanganhdangcode.yahooooo.Util.UtilsDB;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class FogotPassActivity extends AppCompatActivity {
     EditText ephone;
     String phone;
     Button btnfogotpass;
     int trytime = 4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,39 +56,48 @@ public class FogotPassActivity extends AppCompatActivity {
         btnfogotpass.setOnClickListener(v->{
             getdata();
                 if (checkdata()){
-                    UtilsDB.check("userlogin", phone, new UtilsDB.CheckCallback() {
-                        @Override
-                        public void onSuccess(String uid) {
-                            if (uid != null){
-                                Intent i = new Intent(FogotPassActivity.this, OtpSubmitActivity.class);
-                                i.putExtra("phone",phone);
-                                i.putExtra("uid",uid);
-                                startActivity(i);
-                                finish();
+                    String json = "{\"phone\":\"" + phone + "\"}";
 
-                            }
-                            else{
-                                Utils.noti(FogotPassActivity.this, "Số điện thoại không tồn tại, còn "+trytime+" lần thử");
-                                if (--trytime<0){
-                                    Utils.noti(FogotPassActivity.this, "Quá nhiều lần thử");
-                                    System.exit(0);
-                                    finish();
+                    HttpUtils.postJson("http://" + serverip + ":8080/auth/sendotp", json, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("OTP", "Gửi thất bại: " + e.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                String res = response.body().string();
+                                JSONObject obj = null;
+                                try {
+                                    obj = new JSONObject(res);
+                                     AppMng.id = obj.getLong("id");
+                                    runOnUiThread(() -> {
+                                        Utils.noti(FogotPassActivity.this, "Đã gửi OTP đến số điện thoại " + phone);
+                                        Intent intent = new Intent(FogotPassActivity.this, OtpSubmitActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    });
+
+                                } catch (JSONException e) {
+                                    Log.e("OTP", "Lỗi phân tích JSON: " + e.getMessage());
 
                                 }
-
-                            }
+                            } else {
+                                Log.e("OTP", ": " + response.code());
+                                    runOnUiThread( () -> {
+                                        Utils.noti(FogotPassActivity.this, response.message() + trytime + " lần thử");
+                                        if (--trytime < 0) {
+                                            Utils.noti(FogotPassActivity.this, "Quá nhiều lần thử");
+                                            System.exit(0);
+                                            finish();
+                                        }
+                                    });
 
                         }
+                    }});
 
-                        @Override
-                        public void onFailure(Exception e) {
-                            Utils.noti(FogotPassActivity.this, "Lỗi: "+e.getMessage());
-                        }
-
-
-                    });
-
-            }
+                }
         });
 
     }

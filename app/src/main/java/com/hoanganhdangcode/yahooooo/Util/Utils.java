@@ -34,10 +34,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Utils {
-
-    public static final String urlavatardefault = "https://res.cloudinary.com/dbeomwlon/image/upload/v1744406492/avatardefault_xbaqul.png";
+    public static String otpid = "";
+    public static final String urlavatardefault = "https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png?w=300&ssl=1";
     public static final String urlbackgroundefault= "https://res.cloudinary.com/dbeomwlon/image/upload/v1744406492/backgroun%C4%91efaulr_w0pcvc.jpg";
-    public static final String urlavatarerror = "https://static.vecteezy.com/system/resources/previews/034/998/724/non_2x/corrupted-pixel-file-icon-damage-document-symbol-sign-broken-data-vector.jpg";
 
 public static void noti(Context context, String s){
     Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
@@ -87,6 +86,7 @@ public static String getpref(Context context, String pref, String field){
 // Lưu lại
         editor.apply();
     }
+
     public static String getdeviceid(Context context) {
 
     return  Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -221,6 +221,11 @@ public static String getpref(Context context, String pref, String field){
             }
         }).start();
     }
+
+
+    //==================================
+
+
 
 
 }

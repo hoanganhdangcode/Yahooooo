@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hoanganhdangcode.yahooooo.Model.UserMessage;
-import com.hoanganhdangcode.yahooooo.Service.NotificationServices;
+//import com.hoanganhdangcode.yahooooo.Service.NotificationServices;
 import com.hoanganhdangcode.yahooooo.Service.SendMediaMessageService;
 import com.hoanganhdangcode.yahooooo.Util.Utils;
 
@@ -85,14 +85,12 @@ public class MessageRepository {
             }
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         };
-
         realtimeDb.child("messages").child(chatId).addChildEventListener(messageListener);
     }
 
     private void sortMessagesByTimestamp() {
         messageCache.sort(Comparator.comparingLong(UserMessage::getTimestamp));
     }
-
     public void getTokenNoti(String uid, String chatId, OnTokenNotiLoaded callback) {
         firestoreDb.collection("userchat")
                 .document(uid)
